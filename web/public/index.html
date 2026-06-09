@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>World Cup 2026 — Model vs Market</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>⚽</text></svg>" />
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>⚽ World Cup 2026 — Model vs Market</h1>
+      <p class="sub">Probabilistic forecasts vs live Kalshi/Polymarket prices · paper-trading only</p>
+      <nav id="tabs">
+        <button data-tab="tournament" class="active">Tournament</button>
+        <button data-tab="edges">Edge board</button>
+        <button data-tab="paper">Paper trading</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div id="status" class="status">Loading…</div>
+    <section id="tournament" class="tab"></section>
+    <section id="edges" class="tab hidden"></section>
+    <section id="paper" class="tab hidden"></section>
+  </main>
+
+  <footer class="wrap">
+    <span id="meta"></span>
+    <span class="disclaimer">Model output for research. Edges are pre-cost/pre-execution. Not betting advice.</span>
+  </footer>
+
+  <script src="firebase-config.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -m pytest -q)",
+      "Bash(python3 -m pip install -q pytest)",
+      "Bash(time python3 scripts/run_demo.py)"
+    ]
+  }
+}

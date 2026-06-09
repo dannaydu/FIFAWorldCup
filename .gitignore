@@ -1,0 +1,24 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+.DS_Store
+.ipynb_checkpoints/
+
+# Data: keep the folders, ignore large/raw payloads
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# Model artifacts
+artifacts/
+*.pkl
+*.joblib
+
+# Firebase
+.firebase/
+firebase-debug.log
+*-debug.log
+serviceAccount*.json
