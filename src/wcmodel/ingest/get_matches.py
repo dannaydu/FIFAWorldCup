@@ -98,10 +98,14 @@ def _try_download_results(path) -> bool:
         return False
 
 
-def load_matches(path=None) -> pd.DataFrame:
-    """Load canonical matches; auto-download from the mirror, else synthesise."""
+def load_matches(path=None, *, refresh: bool = False) -> pd.DataFrame:
+    """Load canonical matches; optionally refresh the public mirror first.
+
+    A failed refresh leaves the existing local file untouched, so scheduled
+    forecast jobs keep working through transient source/network failures.
+    """
     path = path or (config.RAW / "results.csv")
-    if not path.exists():
+    if refresh or not path.exists():
         _try_download_results(path)
     if not path.exists():
         from wcmodel.ingest.synthetic import generate_matches

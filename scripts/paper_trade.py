@@ -96,7 +96,7 @@ def main() -> None:
 
     # scan
     print("Training model on real results + simulating real 2026 draw…")
-    pred = train_predictor(load_matches())
+    pred = train_predictor(load_matches(refresh=True))
     sim = simulate_tournament(pred, GROUPS_2026, n_sims=args.n_sims, seed=1)
 
     print("Fetching live markets (Kalshi + Polymarket)…")

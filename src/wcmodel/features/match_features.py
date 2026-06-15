@@ -22,6 +22,10 @@ _FORM_DIFF_COLS = [
     "gd_decayed", "gf_decayed", "winrate_decayed",
 ]
 
+_IMPORTANCE_FEATURES = [
+    "friendly", "minor_tournament", "qualifier", "continental", "world_cup",
+]
+
 
 def build_match_features(
     matches: pd.DataFrame,
@@ -52,7 +56,14 @@ def build_match_features(
 
     feat = pd.DataFrame(index=base["match_id"])
     feat["elo_diff"] = a["team_elo"] - b["team_elo"]
+    # Draw likelihood is strongly non-linear around an even matchup. Giving
+    # tree/logistic models the absolute gap makes that relationship explicit.
+    feat["abs_elo_diff"] = feat["elo_diff"].abs()
     feat["host_advantage"] = a["is_home"].astype(float)  # A listed as home & not neutral
+    for importance in _IMPORTANCE_FEATURES:
+        # Match type is known before kickoff and carries real signal: friendlies,
+        # qualifiers, and finals have different selection and draw dynamics.
+        feat[f"is_{importance}"] = (base["importance"] == importance).astype(float).to_numpy()
     for c in _FORM_DIFF_COLS:
         feat[f"{c}_diff"] = a[c] - b[c]
 

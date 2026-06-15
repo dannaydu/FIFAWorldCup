@@ -148,6 +148,13 @@ tests/
   history. Produces the score matrix that prices score markets.
 - **Gradient boosting** (`models/gbm.py`): LightGBM on the diff features; falls
   back to scikit-learn's `HistGradientBoostingClassifier` if LightGBM is absent.
+  Training is deterministic, and the fallback is regularized against the
+  overfitting seen in chronological backtests.
+- **Draw-aware context**: the W/D/L models get the absolute Elo gap explicitly,
+  so an evenly matched fixture is distinguishable from merely knowing which
+  side is stronger. Known pre-match competition type (friendly, qualifier,
+  continental tournament, World Cup) is also included because selection and
+  draw dynamics differ.
 - **Confederation calibration** (`features/confederations.py`): measures, over
   inter-confederation matches only, how much each confederation over/under-performs
   its Elo (AFC −0.04, OFC −0.13, UEFA +0.09, CONMEBOL +0.08). Feeds the models a
@@ -171,6 +178,9 @@ tests/
   value.
 - **Leakage control**: every form feature is shifted to use only prior matches;
   backtests use **time-based** splits (`evaluate.run_backtest`), never random.
+- **Fresh results on production runs**: the web exporter, edge report, and paper
+  trader refresh the public results mirror before training, then fall back to
+  the existing local file if the network/source is unavailable.
 - **Calibration first**: evaluation reports log-loss, Brier, and Ranked
   Probability Score plus a reliability table — "when it says 20%, does it happen
   ~20%?" matters more than accuracy.

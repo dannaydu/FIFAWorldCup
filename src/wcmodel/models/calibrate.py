@@ -84,4 +84,5 @@ def all_metrics(y: np.ndarray, probs: np.ndarray) -> dict[str, float]:
         "log_loss": log_loss(y, probs),
         "brier": brier_score(y, probs),
         "rps": ranked_probability_score(y, probs),
+        "accuracy": float(np.mean(np.argmax(probs, axis=1) == np.asarray(y))),
     }

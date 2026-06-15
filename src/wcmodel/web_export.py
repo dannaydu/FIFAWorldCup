@@ -184,7 +184,9 @@ def _fetch_markets() -> pd.DataFrame:
 def build_snapshots(*, n_sims: int = 20_000, lam: float = config.MARKET_SHRINKAGE_LAMBDA,
                     update_ledger: bool = True) -> dict[str, dict]:
     generated_at = _now()
-    match_history = load_matches()
+    # Tournament results are high-value new information for later group/knockout
+    # forecasts. Refresh best-effort instead of silently reusing a stale local CSV.
+    match_history = load_matches(refresh=True)
     pred = train_predictor(match_history)
     sim = simulate_tournament(pred, GROUPS_2026, n_sims=n_sims, seed=1)
 

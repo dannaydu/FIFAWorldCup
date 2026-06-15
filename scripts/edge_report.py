@@ -39,7 +39,7 @@ def banner(t):
 
 def main():
     banner("1. TRAIN ON REAL RESULTS + SIMULATE REAL 2026 DRAW")
-    matches = load_matches()
+    matches = load_matches(refresh=True)
     # Use FULL history: Elo + form stay cross-confederation calibrated; the DC
     # MLE applies its own recency window internally (config.DC_FIT_MAX_AGE_YEARS).
     print(f"{len(matches):,} matches (full history) | "

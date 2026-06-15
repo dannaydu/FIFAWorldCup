@@ -35,13 +35,17 @@ class GBMatchModel:
                 colsample_bytree=0.8,
                 min_child_samples=kwargs.get("min_child_samples", 40),
                 reg_lambda=1.0,
+                random_state=kwargs.get("random_state", 1),
                 verbose=-1,
             )
         else:
             self.model = HistGradientBoostingClassifier(
                 learning_rate=kwargs.get("learning_rate", 0.05),
                 max_iter=kwargs.get("n_estimators", 400),
+                max_leaf_nodes=kwargs.get("num_leaves", 15),
+                min_samples_leaf=kwargs.get("min_child_samples", 80),
                 l2_regularization=1.0,
+                random_state=kwargs.get("random_state", 1),
             )
 
     def fit(self, feat: pd.DataFrame) -> "GBMatchModel":

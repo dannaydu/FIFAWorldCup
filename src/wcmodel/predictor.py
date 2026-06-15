@@ -32,6 +32,10 @@ _FORM_DIFF_COLS = [
     "gd_decayed", "gf_decayed", "winrate_decayed",
 ]
 
+_IMPORTANCE_FEATURES = [
+    "friendly", "minor_tournament", "qualifier", "continental", "world_cup",
+]
+
 
 class MatchPredictor:
     def __init__(self, elo_model, gbm_model, dc_model, team_state, squad,
@@ -54,12 +58,15 @@ class MatchPredictor:
         )
 
     def _feature_dict(self, team_a: str, team_b: str, *, neutral: bool = True,
-                      host_a: bool = False) -> dict[str, float]:
+                      host_a: bool = False, importance: str = "world_cup") -> dict[str, float]:
         a, b = self._team_row(team_a), self._team_row(team_b)
         row: dict[str, float] = {}
         row["elo_diff"] = float(a.get("team_elo", config.ELO_START) -
                                 b.get("team_elo", config.ELO_START))
+        row["abs_elo_diff"] = abs(row["elo_diff"])
         row["host_advantage"] = 1.0 if (host_a or not neutral) else 0.0
+        for match_type in _IMPORTANCE_FEATURES:
+            row[f"is_{match_type}"] = 1.0 if importance == match_type else 0.0
         for c in _FORM_DIFF_COLS:
             row[f"{c}_diff"] = float(a.get(c, 0.0)) - float(b.get(c, 0.0))
         for c in SQUAD_FEATURE_COLS:
@@ -71,22 +78,29 @@ class MatchPredictor:
         return row
 
     def build_features(self, team_a: str, team_b: str, *, neutral: bool = True,
-                       host_a: bool = False) -> pd.DataFrame:
-        row = self._feature_dict(team_a, team_b, neutral=neutral, host_a=host_a)
+                       host_a: bool = False, importance: str = "world_cup") -> pd.DataFrame:
+        row = self._feature_dict(
+            team_a, team_b, neutral=neutral, host_a=host_a, importance=importance,
+        )
         return pd.DataFrame([row]).reindex(columns=self.feature_cols, fill_value=0.0)
 
-    def fixture_feature_frame(self, pairs, host_set=frozenset()) -> pd.DataFrame:
+    def fixture_feature_frame(self, pairs, host_set=frozenset(),
+                              importance: str = "world_cup") -> pd.DataFrame:
         """Batched feature table for many (team_a, team_b) fixtures (neutral)."""
         rows = [
-            self._feature_dict(a, b, neutral=True, host_a=a in host_set)
+            self._feature_dict(
+                a, b, neutral=True, host_a=a in host_set, importance=importance,
+            )
             for a, b in pairs
         ]
         return pd.DataFrame(rows).reindex(columns=self.feature_cols, fill_value=0.0)
 
     # --------------------------------------------------------- prediction --- #
     def model_probs(self, team_a: str, team_b: str, *, neutral: bool = True,
-                    host_a: bool = False) -> dict[str, np.ndarray]:
-        feat = self.build_features(team_a, team_b, neutral=neutral, host_a=host_a)
+                    host_a: bool = False, importance: str = "world_cup") -> dict[str, np.ndarray]:
+        feat = self.build_features(
+            team_a, team_b, neutral=neutral, host_a=host_a, importance=importance,
+        )
         return {
             "elo": self.elo.predict_proba(feat)[0],
             "gbm": self.gbm.predict_proba(feat)[0],
@@ -94,8 +108,10 @@ class MatchPredictor:
         }
 
     def predict_wdl(self, team_a: str, team_b: str, *, neutral: bool = True,
-                    host_a: bool = False) -> np.ndarray:
-        probs = self.model_probs(team_a, team_b, neutral=neutral, host_a=host_a)
+                    host_a: bool = False, importance: str = "world_cup") -> np.ndarray:
+        probs = self.model_probs(
+            team_a, team_b, neutral=neutral, host_a=host_a, importance=importance,
+        )
         return combine(probs, self.weights)
 
     def score_matrix(self, team_a: str, team_b: str, *, neutral: bool = True,

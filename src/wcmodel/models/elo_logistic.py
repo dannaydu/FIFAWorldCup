@@ -10,7 +10,7 @@ import pandas as pd
 from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import StandardScaler
 
-_INPUTS = ["elo_diff", "host_advantage"]
+_INPUTS = ["elo_diff", "abs_elo_diff", "host_advantage"]
 
 
 class EloLogistic:

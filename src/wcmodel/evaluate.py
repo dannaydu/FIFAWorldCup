@@ -11,6 +11,7 @@ import numpy as np
 import pandas as pd
 
 from wcmodel.features.match_features import build_match_features, feature_columns
+from wcmodel.features.confederations import team_conf_strength
 from wcmodel.features.squad_features import load_squad_features, load_squad_panel
 from wcmodel.models import calibrate
 from wcmodel.models.elo_logistic import EloLogistic
@@ -21,9 +22,16 @@ from wcmodel.models.poisson import DixonColesModel
 
 def run_backtest(matches: pd.DataFrame, cutoff: str = "2023-01-01") -> dict:
     cut = pd.Timestamp(cutoff)
+    match_dates = pd.to_datetime(matches["date"])
+    train_matches = matches[match_dates < cut]
     squad = load_squad_features()
     panel = load_squad_panel()
-    feat = build_match_features(matches, squad=squad, squad_panel=panel)
+    # Confederation offsets are target-derived, so estimate them from the
+    # training side only. Computing them on the full frame leaks test outcomes.
+    conf_strength = team_conf_strength(train_matches)
+    feat = build_match_features(
+        matches, squad=squad, squad_panel=panel, conf_strength=conf_strength,
+    )
     cols = feature_columns(feat)
 
     feat["date"] = pd.to_datetime(feat["date"])
@@ -36,7 +44,7 @@ def run_backtest(matches: pd.DataFrame, cutoff: str = "2023-01-01") -> dict:
     elo = EloLogistic().fit(train)
     gbm = GBMatchModel(features=cols).fit(train)
     dc = DixonColesModel().fit(
-        matches[pd.to_datetime(matches["date"]) < cut], ref_date=cut
+        train_matches, ref_date=cut
     )
 
     # Predict on test.
