@@ -13,6 +13,11 @@ market baseline), recency- and importance-weighted form, squad value & roster
 continuity, and a tournament simulator that implements the real 2026 format
 (12 groups of 4, top two + the **eight best third-placed teams** → Round of 32).
 
+> **Data is not committed.** Large/licensed datasets are gitignored. On a fresh
+> clone, run `pip install -r requirements.txt` then `python scripts/fetch_squads.py`;
+> match results auto-download on first run. **No API keys required** — every data
+> source (Kalshi, Polymarket, Kaggle, GitHub) is read keyless.
+
 ---
 
 ## Quickstart
@@ -197,9 +202,21 @@ closes itself as group winners and eliminations resolve.
 
 ## Hosting the dashboard (Firebase)
 
-A dependency-free web UI lives in `web/public/` (Tournament / Edge board / Paper
-trading), served by **Firebase Hosting**. The heavy Python ML never runs on
-serverless — it computes snapshots that the static UI reads.
+A dependency-free web UI lives in `web/public/`, served by **Firebase Hosting**.
+The heavy Python ML never runs on serverless — it computes snapshots the static
+UI reads. Tabs:
+
+* **🔮 Play — "Beat the Oracle"**: a fantasy game where each visitor gets a
+  virtual 🪙1,000, stakes it on match / group / champion markets at the model's
+  implied odds, and tries to beat the model (fade the 🔮 where they disagree).
+  State is per-browser (localStorage, no login); cards are shareable via URL.
+  Picks **auto-settle** as results land — the exporter writes a `results` snapshot
+  (match outcomes parsed from settled Kalshi tickers, group/champion winners from
+  Polymarket resolutions) and the game books each player's bankroll on next load.
+* **Tournament**: championship + advancement probabilities.
+* **Edge board**: live model-vs-market edges, **filterable by venue**
+  (Polymarket / Kalshi) with per-row platform badges.
+* **Paper trading**: the model's own ledger with CLV.
 
 ```bash
 python scripts/export_web.py             # write web/public/data/*.json

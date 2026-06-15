@@ -276,6 +276,44 @@ def kalshi_resolutions(series_tickers=("KXWCROUND", "KXWCGAME"),
     return out
 
 
+def polymarket_results(*, tag_slug: str = "world-cup", limit: int = 400,
+                       timeout: float = 15.0) -> dict[str, str]:
+    """Resolved futures -> game keys: {"grp:<L>": team, "champion": team}."""
+    if requests is None:
+        return {}
+    try:
+        r = requests.get(
+            f"{POLYMARKET_GAMMA}/events",
+            params={"closed": "true", "limit": limit, "tag_slug": tag_slug},
+            timeout=timeout,
+        )
+        r.raise_for_status()
+        events = r.json()
+    except Exception:
+        return {}
+
+    out: dict[str, str] = {}
+    for ev in events:
+        title = ev.get("title", "")
+        mtype, group = _classify_polymarket(title)
+        if mtype not in ("group_winner", "champion"):
+            continue
+        for mk in ev.get("markets", []):
+            prices = _maybe_list(mk.get("outcomePrices"))
+            outcomes = _maybe_list(mk.get("outcomes")) or ["Yes", "No"]
+            if not prices:
+                continue
+            yes_i = outcomes.index("Yes") if "Yes" in outcomes else 0
+            yp = _to_float(prices[yes_i])
+            if yp is None or yp < 0.99:
+                continue
+            team = _team_from_question(mk.get("question", ""))
+            if not team:
+                continue
+            out["champion" if mtype == "champion" else f"grp:{group}"] = team
+    return out
+
+
 def all_resolutions() -> dict[str, bool]:
     """Union of resolved markets across venues, keyed by market_id (token/ticker)."""
     res = {}

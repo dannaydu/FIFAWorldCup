@@ -42,6 +42,7 @@ def fetch_markets() -> pd.DataFrame:
     return union_markets([
         polymarket_world_cup(),
         kalshi_series("KXWCROUND", market_type="reach_round"),
+        kalshi_series("KXWCGAME", market_type="match"),
     ])
 
 
@@ -103,7 +104,7 @@ def main() -> None:
     print(f"  {len(market)} live contracts; "
           f"{market['midpoint'].notna().sum() if not market.empty else 0} priced.")
 
-    opps = build_opportunities(sim, market, lam=args.lam)
+    opps = build_opportunities(sim, market, predictor=pred, lam=args.lam)
     print(f"  {len(opps)} opportunities clear filters "
           f"(edge>={config.MIN_EDGE:.0%}, spread<={config.MAX_SPREAD:.0%}, "
           f"liq>=${config.MIN_LIQUIDITY:.0f}).")

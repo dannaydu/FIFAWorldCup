@@ -13,6 +13,7 @@
       <h1>⚽ World Cup 2026 — Model vs Market</h1>
       <p class="sub">Probabilistic forecasts vs live Kalshi/Polymarket prices · paper-trading only</p>
       <nav id="tabs">
+        <button data-tab="play" class="play-tab">🔮 Play</button>
         <button data-tab="tournament" class="active">Tournament</button>
         <button data-tab="edges">Edge board</button>
         <button data-tab="paper">Paper trading</button>
@@ -22,6 +23,7 @@
 
   <main class="wrap">
     <div id="status" class="status">Loading…</div>
+    <section id="play" class="tab hidden"></section>
     <section id="tournament" class="tab"></section>
     <section id="edges" class="tab hidden"></section>
     <section id="paper" class="tab hidden"></section>
@@ -33,6 +35,7 @@
   </footer>
 
   <script src="firebase-config.js"></script>
+  <script src="fantasy.js"></script>
   <script type="module" src="app.js"></script>
 </body>
 </html>

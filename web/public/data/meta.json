@@ -1,10 +1,12 @@
 {
-  "generated_at": "2026-06-09T21:13:42Z",
-  "n_matches": 49365,
+  "generated_at": "2026-06-11T03:48:10Z",
+  "n_matches": 2,
   "n_sims": 20000,
   "lambda": 0.5,
   "gbm_backend": "sklearn-hist",
-  "n_live_contracts": 1008,
-  "n_opportunities": 18,
+  "n_live_contracts": 1225,
+  "n_opportunities": 13,
+  "n_fixtures": 72,
+  "n_results": 0,
   "note": "Probabilistic model output. Paper-trading only, pre-cost edges."
 }

@@ -2,7 +2,9 @@
 // Data source: Firestore (collection "snapshots") when firebase-config.js is
 // filled in, otherwise the bundled /data/*.json. Renders three tabs.
 
-const DOCS = ["tournament", "edges", "ledger", "meta"];
+const DOCS = ["tournament", "edges", "matches", "results", "ledger", "meta"];
+let edgeVenue = "all";   // all | polymarket | kalshi
+let EDGES = null;
 const pct = (x) => (x == null ? "—" : (x * 100).toFixed(1) + "%");
 const signed = (x) => (x == null ? "—" : (x >= 0 ? "+" : "") + (x * 100).toFixed(1) + "%");
 const money = (x) => (x == null ? "—" : "$" + Number(x).toLocaleString());
@@ -54,27 +56,47 @@ function renderTournament(d) {
     <th>Reach SF</th><th>Reach final</th><th>Champion</th></tr></thead><tbody>${rows}</tbody></table>`;
 }
 
+const VENUE = { polymarket: "🟣 Polymarket", kalshi: "🔵 Kalshi" };
+
 function renderEdges(d) {
+  EDGES = d || EDGES;
   const host = document.getElementById("edges");
-  const ops = (d && d.opportunities) || [];
-  if (!ops.length) { host.innerHTML = `<div class="empty">No edges clear the filters right now (markets thin pre-tournament, or run the export).</div>`; return; }
+  const all = (EDGES && EDGES.opportunities) || [];
+  const count = (v) => all.filter((o) => v === "all" || o.platform === v).length;
+  const pills = [["all", `All (${all.length})`], ["polymarket", `${VENUE.polymarket} (${count("polymarket")})`],
+    ["kalshi", `${VENUE.kalshi} (${count("kalshi")})`]]
+    .map(([v, l]) => `<button class="venue-pill ${edgeVenue === v ? "active" : ""}" data-venue="${v}">${l}</button>`).join("");
+
+  const ops = all.filter((o) => edgeVenue === "all" || o.platform === edgeVenue);
+  const header = `<h2>Live edge board <span style="color:var(--muted);font-weight:400">(λ=${(EDGES && EDGES.lambda) ?? "—"} shrinkage)</span></h2>
+    <div class="venue-filter">${pills}</div>`;
+
+  if (!ops.length) {
+    host.innerHTML = header + `<div class="empty">No edges on ${edgeVenue === "all" ? "either venue" : VENUE[edgeVenue]} right now (markets are thin pre-tournament).</div>`;
+    return;
+  }
   const rows = ops.map((o) => {
     const side = o.side === "YES" ? "BUY" : "FADE";
-    const edgeYes = (o.blended ?? o.model_prob) - o.market_prob;
+    const market = o.market_type === "match"
+      ? (o.contract || "").replace(/\s*Winner\??$/i, "")
+      : (o.market_type ?? "");
     return `<tr>
-      <td>${o.team ?? o.contract}</td>
+      <td><span class="venue ${o.platform}">${o.platform === "kalshi" ? "🔵" : "🟣"}</span> ${o.team ?? o.contract}</td>
       <td><span class="tag ${side}">${side}</span></td>
-      <td>${o.market_type ?? ""}</td>
+      <td>${market}</td>
       <td>${pct(o.model_prob)}</td>
       <td>${pct(o.market_prob)}</td>
-      <td class="${edgeYes >= 0 ? "pos" : "neg"}">${signed(o.edge * (o.side === "YES" ? 1 : -1))}</td>
+      <td class="${o.side === "YES" ? "pos" : "neg"}">${signed(o.edge * (o.side === "YES" ? 1 : -1))}</td>
       <td>${pct(o.entry_price)}</td>
       <td>${money(o.liquidity)}</td>
     </tr>`;
   }).join("");
-  host.innerHTML = `<h2>Live edge board <span style="color:var(--muted);font-weight:400">(λ=${d.lambda ?? "—"} shrinkage)</span></h2>
-    <table><thead><tr><th>Team</th><th>Side</th><th>Market</th><th>Model</th>
+  host.innerHTML = header +
+    `<table><thead><tr><th>Contract</th><th>Side</th><th>Market</th><th>Model</th>
     <th>Market</th><th>Edge</th><th>Entry</th><th>Liquidity</th></tr></thead><tbody>${rows}</tbody></table>`;
+
+  host.querySelectorAll("[data-venue]").forEach((b) =>
+    b.addEventListener("click", () => { edgeVenue = b.dataset.venue; renderEdges(); }));
 }
 
 function renderPaper(d) {
@@ -112,7 +134,7 @@ function setupTabs() {
   const btns = document.querySelectorAll("#tabs button");
   btns.forEach((b) => b.addEventListener("click", () => {
     btns.forEach((x) => x.classList.toggle("active", x === b));
-    ["tournament", "edges", "paper"].forEach((id) =>
+    ["play", "tournament", "edges", "paper"].forEach((id) =>
       document.getElementById(id).classList.toggle("hidden", id !== b.dataset.tab));
   }));
 }
@@ -131,6 +153,7 @@ async function main() {
   renderTournament(data.tournament);
   renderEdges(data.edges);
   renderPaper(data.ledger);
+  if (window.FANTASY) window.FANTASY.init(data);
 
   const m = data.meta || {};
   document.getElementById("meta").textContent =
