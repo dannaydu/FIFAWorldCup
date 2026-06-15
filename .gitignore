@@ -22,3 +22,6 @@ artifacts/
 firebase-debug.log
 *-debug.log
 serviceAccount*.json
+
+# Node
+node_modules/
