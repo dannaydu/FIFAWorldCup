@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-15T12:22:17Z",
+  "generated_at": "2026-06-15T19:05:40Z",
   "games": [
     {
       "team_a": "Australia",
@@ -152,6 +152,21 @@
       "logloss": 1.077
     },
     {
+      "team_a": "Spain",
+      "team_b": "Cape Verde",
+      "p_a": 0.8901,
+      "p_draw": 0.0812,
+      "p_b": 0.0287,
+      "result": "D",
+      "result_label": "Draw",
+      "model_pick": "A",
+      "model_pick_label": "Spain",
+      "model_pick_prob": 0.8901,
+      "correct": false,
+      "brier": 1.6373,
+      "logloss": 2.5108
+    },
+    {
       "team_a": "Sweden",
       "team_b": "Tunisia",
       "p_a": 0.4506,
@@ -183,16 +198,16 @@
     }
   ],
   "summary": {
-    "n": 12,
-    "accuracy": 0.4167,
-    "expected_accuracy": 0.5704,
-    "expected_correct": 6.85,
-    "accuracy_delta": -0.1538,
-    "avg_brier": 0.6687,
-    "avg_logloss": 1.0727,
+    "n": 13,
+    "accuracy": 0.3846,
+    "expected_accuracy": 0.595,
+    "expected_correct": 7.74,
+    "accuracy_delta": -0.2104,
+    "avg_brier": 0.7432,
+    "avg_logloss": 1.1833,
     "random_logloss": 1.0986,
-    "logloss_skill": 0.0236,
-    "actual_draws": 4,
-    "expected_draws": 2.83
+    "logloss_skill": -0.0771,
+    "actual_draws": 5,
+    "expected_draws": 2.91
   }
 }

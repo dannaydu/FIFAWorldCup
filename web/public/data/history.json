@@ -208,5 +208,44 @@
       "actual_draws": 4,
       "expected_draws": 2.83
     }
+  },
+  {
+    "t": "2026-06-15T19:05:40Z",
+    "champion_top": [
+      {
+        "team": "Spain",
+        "p": 0.2995
+      },
+      {
+        "team": "Argentina",
+        "p": 0.1888
+      },
+      {
+        "team": "England",
+        "p": 0.1313
+      },
+      {
+        "team": "France",
+        "p": 0.1206
+      },
+      {
+        "team": "Brazil",
+        "p": 0.0707
+      }
+    ],
+    "n_opportunities": 57,
+    "scorecard": {
+      "n": 13,
+      "accuracy": 0.3846,
+      "expected_accuracy": 0.595,
+      "expected_correct": 7.74,
+      "accuracy_delta": -0.2104,
+      "avg_brier": 0.7432,
+      "avg_logloss": 1.1833,
+      "random_logloss": 1.0986,
+      "logloss_skill": -0.0771,
+      "actual_draws": 5,
+      "expected_draws": 2.91
+    }
   }
 ]
