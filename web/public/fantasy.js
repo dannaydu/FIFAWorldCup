@@ -86,7 +86,7 @@ window.FANTASY = (() => {
     const teams = DATA.tournament.teams || [];
     if (teams.length) {
       MARKETS.push({
-        id: "champion", kind: "champion", title: "🏆 World Cup Winner",
+        id: "champion", kind: "champion", title: "World Cup Winner",
         options: [...teams].sort((a, b) => b.p_champion - a.p_champion)
           .map((t) => ({ key: t.team, team: t.team, label: t.team, prob: Math.max(t.p_champion, 0.004) })),
       });
@@ -110,20 +110,20 @@ window.FANTASY = (() => {
     const rec = record(); const rp = realized();
     const pct = Math.min((pendingStake() / Math.max(balance(), 1)) * 100, 100);
     return `<div class="f-dash">
-      <div class="f-stat"><span class="k">Bankroll</span><span class="v">🪙 ${fmt(balance())}</span></div>
-      <div class="f-stat"><span class="k">Free</span><span class="v">🪙 ${fmt(free())}</span></div>
-      <div class="f-stat"><span class="k">At stake</span><span class="v">🪙 ${fmt(pendingStake())}</span></div>
-      <div class="f-stat"><span class="k">Live payout</span><span class="v pos">🪙 ${fmt(potential())}</span></div>
+      <div class="f-stat"><span class="k">Bankroll</span><span class="v">${fmt(balance())}</span></div>
+      <div class="f-stat"><span class="k">Free</span><span class="v">${fmt(free())}</span></div>
+      <div class="f-stat"><span class="k">At stake</span><span class="v">${fmt(pendingStake())}</span></div>
+      <div class="f-stat"><span class="k">Live payout</span><span class="v pos">${fmt(potential())}</span></div>
       <div class="f-stat"><span class="k">Record</span><span class="v">${rec.won}–${rec.lost}</span></div>
-      <div class="f-stat"><span class="k">Settled P/L</span><span class="v ${rp >= 0 ? "pos" : "neg"}">${rp >= 0 ? "+" : "−"}🪙 ${fmt(Math.abs(rp))}</span></div>
-      <div class="f-stat"><span class="k">Fading 🔮</span><span class="v">${fadingCount()}</span></div>
+      <div class="f-stat"><span class="k">Settled P/L</span><span class="v ${rp >= 0 ? "pos" : "neg"}">${rp >= 0 ? "+" : "−"}${fmt(Math.abs(rp))}</span></div>
+      <div class="f-stat"><span class="k">Against model</span><span class="v">${fadingCount()}</span></div>
       <div class="f-alloc"><div class="f-alloc-bar" style="width:${pct}%"></div></div>
     </div>`;
   }
 
   function subnav() {
-    const tabs = [["matches", "⚽ Matches"], ["champion", "🏆 Champion"], ["groups", "🅰️ Groups"],
-      ["card", `🧾 My Card (${Object.keys(state.picks).length})`]];
+    const tabs = [["matches", "Matches"], ["champion", "Champion"], ["groups", "Groups"],
+      ["card", `My Card (${Object.keys(state.picks).length})`]];
     return `<div class="f-pills">${tabs.map(([k, l]) =>
       `<button class="f-pill ${sub === k ? "active" : ""}" data-action="sub" data-sub="${k}">${l}</button>`).join("")}</div>`;
   }
@@ -158,7 +158,7 @@ window.FANTASY = (() => {
       <div class="f-chips">${chips}</div>
       <input type="range" min="0" max="${cap}" value="${stake}" data-action="slider" data-m="${m.id}" class="f-slider" />
       <div class="f-stake-foot">
-        <span>🪙 ${fmt(stake)} → win <b class="pos">🪙 ${fmt(stake * oddsOf(o.prob))}</b></span>
+        <span>${fmt(stake)} at risk → <b class="pos">${fmt(stake * oddsOf(o.prob))}</b> payout</span>
         <span>
           <button class="f-btn ghost" data-action="cancel">Cancel</button>
           <button class="f-btn" data-action="place" data-m="${m.id}" ${stake <= 0 ? "disabled" : ""}>${existing ? "Update" : "Place"} pick</button>
@@ -203,18 +203,18 @@ window.FANTASY = (() => {
         <td>${m.title}</td>
         <td>${flag(p.team)} ${p.label} ${fading ? `<span class="tag FADE">fade 🔮</span>` : `<span class="tag YES">with 🔮</span>`}</td>
         <td>${p.odds.toFixed(2)}×</td>
-        <td>🪙 ${fmt(p.stake)}</td>
-        <td class="pos">🪙 ${fmt(p.stake * p.odds)}</td>
+        <td>${fmt(p.stake)}</td>
+        <td class="pos">${fmt(p.stake * p.odds)}</td>
         <td>${status}</td>
         <td>${last}</td>
       </tr>`;
     }).join("");
     return `<table><thead><tr><th>Market</th><th>Your pick</th><th>Odds</th><th>Stake</th><th>To win</th><th>Status</th><th></th></tr></thead><tbody>${rows}</tbody></table>
       <div class="f-card-actions">
-        <button class="f-btn" data-action="share">🔗 Share my card</button>
+        <button class="f-btn" data-action="share">Share card</button>
         <button class="f-btn ghost" data-action="reset">Reset everything</button>
       </div>
-      <p class="f-note">Picks settle as results come in during the tournament. Fade the oracle 🔮 where you think it's wrong — that's where the big payouts are.</p>`;
+      <p class="f-note">Picks settle as results come in. Taking the other side of the model pays more when your read is right.</p>`;
   }
 
   function accountBar() {
@@ -230,7 +230,7 @@ window.FANTASY = (() => {
     if (!host) return;
     const body = sub === "card" ? viewCard() : viewMarkets(sub);
     host.innerHTML = `<div class="fantasy">
-      <div class="f-hero"><h2>🔮 Beat the Oracle</h2><p>Build your prediction card with 🪙1,000. Take the model's odds — or fade it.</p></div>
+      <div class="f-hero"><div class="eyebrow">Paper pick'em</div><h2>Build a card</h2><p>Start with 1,000 credits. Take the model's side or price the upset.</p></div>
       ${accountBar()}${dashboard()}${subnav()}<div class="f-body">${body}</div>
     </div>`;
   }

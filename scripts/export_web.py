@@ -24,7 +24,7 @@ def main() -> None:
     print("Building snapshots (train + simulate + live markets)…")
     snaps = build_snapshots()
     for name, doc in snaps.items():
-        (OUT / f"{name}.json").write_text(json.dumps(doc, indent=2))
+        (OUT / f"{name}.json").write_text(json.dumps(doc, indent=2, allow_nan=False))
         print(f"  wrote {OUT / f'{name}.json'}")
 
     # Append a compact, time-stamped history row — saved on every refresh.
@@ -41,7 +41,7 @@ def main() -> None:
         "scorecard": snaps["scorecard"]["summary"],
     })
     hist = hist[-300:]
-    hist_path.write_text(json.dumps(hist, indent=2))
+    hist_path.write_text(json.dumps(hist, indent=2, allow_nan=False))
     print(f"  appended history.json ({len(hist)} snapshots)")
     print("Done. Run `firebase deploy` (or open web/public/index.html) to view.")
 

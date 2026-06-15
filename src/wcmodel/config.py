@@ -81,15 +81,15 @@ DC_TIME_DECAY = 0.0018       # ~ half-life of ~1 year
 # stay cross-confederation calibrated.
 DC_FIT_MAX_AGE_YEARS = 14.0
 
-# Ensemble weights (spec §5), tuned on a real-data 2023+ backtest grid search:
-# GBM is clearly strongest, Dixon-Coles weakest for W/D/L (it still supplies the
-# score-matrix SHAPE in the simulator, so it keeps a small but non-zero weight).
+# Ensemble weights (spec §5), selected on 2022-23 and checked on a held-out
+# 2024+ time split. GBM is strongest for W/D/L; Dixon-Coles still supplies the
+# score-matrix shape in the simulator, so it keeps a small non-zero weight.
 # `market` only applies where a match market exists; the simulator renormalizes
 # over the other three.
 ENSEMBLE_WEIGHTS = {
-    "elo": 0.15,
-    "poisson": 0.10,
-    "gbm": 0.55,
+    "elo": 0.12,
+    "poisson": 0.04,
+    "gbm": 0.64,
     "market": 0.20,
 }
 

@@ -7,6 +7,10 @@ let edgeVenue = "all";   // all | polymarket | kalshi
 let EDGES = null;
 
 const intro = (t) => `<p class="tab-intro">${t}</p>`;
+const sectionHead = (kicker, title, copy, meta = "") => `<div class="section-head">
+  <div><div class="eyebrow">${kicker}</div><h2>${title}</h2><p>${copy}</p></div>
+  ${meta ? `<div class="section-meta">${meta}</div>` : ""}
+</div>`;
 const miniBar = (a, d, b) => `<span class="mini"><i style="width:${a * 100}%;background:var(--buy)"></i><i style="width:${d * 100}%;background:var(--muted)"></i><i style="width:${b * 100}%;background:var(--fade)"></i></span>`;
 
 // Minimal dependency-free SVG line chart.
@@ -39,12 +43,16 @@ const el = (html) => { const t = document.createElement("template"); t.innerHTML
 // Data always loads from the deployed JSON snapshots (the cron refreshes them).
 // Firebase config (if present) is only used by auth.js for optional sign-in.
 async function loadFromJson() {
-  const out = {};
+  const out = { __errors: {} };
   await Promise.all(DOCS.map(async (name) => {
     try {
       const r = await fetch(`data/${name}.json`, { cache: "no-store" });
       out[name] = r.ok ? await r.json() : null;
-    } catch { out[name] = null; }
+      if (!r.ok) out.__errors[name] = `HTTP ${r.status}`;
+    } catch (e) {
+      out[name] = null;
+      out.__errors[name] = e.message || "invalid snapshot";
+    }
   }));
   return out;
 }
@@ -54,6 +62,12 @@ function renderTournament(d) {
   if (!d || !d.teams) { host.innerHTML = `<div class="empty">No tournament data yet. Run <code>python scripts/export_web.py</code>.</div>`; return; }
   const teams = [...d.teams].sort((a, b) => b.p_champion - a.p_champion);
   const max = Math.max(...teams.map((t) => t.p_champion), 0.01);
+  const leaders = teams.slice(0, 4).map((t, i) => `<div class="leader">
+    <span class="rank">${String(i + 1).padStart(2, "0")}</span>
+    <div><strong>${t.team}</strong><small>Group ${t.group}</small></div>
+    <b>${pct(t.p_champion)}</b>
+    <i style="width:${(t.p_champion / max) * 100}%"></i>
+  </div>`).join("");
   const rows = teams.map((t) => `
     <tr>
       <td>${t.team}</td><td>${t.group ?? ""}</td>
@@ -63,10 +77,10 @@ function renderTournament(d) {
       <td>${pct(t.p_final)}</td>
       <td>${pct(t.p_champion)} <span class="bar" style="width:${(t.p_champion / max) * 70}px"></span></td>
     </tr>`).join("");
-  host.innerHTML = `<h2>Championship & advancement probabilities</h2>
-    ${intro("The model's forecast for the whole tournament — from 50,000 simulated runs of the real 2026 draw. Sorted by chance of winning it all.")}
-    <table><thead><tr><th>Team</th><th>Grp</th><th>Win group</th><th>Reach QF</th>
-    <th>Reach SF</th><th>Reach final</th><th>Champion</th></tr></thead><tbody>${rows}</tbody></table>`;
+  host.innerHTML = `${sectionHead("Tournament forecast", "The field, priced", "Advancement probabilities from the current model and official draw.", `${teams.length} teams`)}
+    <div class="leader-grid">${leaders}</div>
+    <div class="table-shell"><table><thead><tr><th>Team</th><th>Grp</th><th>Win group</th><th>Reach QF</th>
+    <th>Reach SF</th><th>Reach final</th><th>Champion</th></tr></thead><tbody>${rows}</tbody></table></div>`;
 }
 
 function renderScorecard(d, history) {
@@ -74,18 +88,25 @@ function renderScorecard(d, history) {
   const s = (d && d.summary) || {};
   const games = (d && d.games) || [];
   if (!games.length) {
-    host.innerHTML = `<h2>Results — how the model is doing</h2>` +
-      intro("Once group games are played, this scores the model's pre-match predictions against what actually happened.") +
+    host.innerHTML = sectionHead("Model audit", "Results", "Locked pre-match probabilities scored against final results.") +
       `<div class="empty">No games scored yet.</div>`;
     return;
   }
   const beatRandom = s.avg_logloss != null && s.avg_logloss < s.random_logloss;
+  const actualCorrect = Math.round(s.accuracy * s.n);
+  const expectedCorrect = s.expected_correct ?? games.reduce((n, g) => n + g.model_pick_prob, 0);
+  const actualDraws = s.actual_draws ?? games.filter((g) => g.result === "D").length;
+  const expectedDraws = s.expected_draws ?? games.reduce((n, g) => n + g.p_draw, 0);
+  const skill = s.logloss_skill ?? (1 - s.avg_logloss / s.random_logloss);
+  const deltaGames = actualCorrect - expectedCorrect;
+  const drawGap = actualDraws - expectedDraws;
   const cards = [
     ["Games scored", s.n],
-    ["Correct picks", `${Math.round(s.accuracy * s.n)} / ${s.n} (${pct(s.accuracy)})`],
-    ["Avg Brier", s.avg_brier],
-    ["Avg log-loss", `${s.avg_logloss} ${beatRandom ? "✅" : "⚠️"}`],
-    ["vs random guess", s.random_logloss],
+    ["Top-pick record", `${actualCorrect}–${s.n - actualCorrect}`],
+    ["Expected correct", expectedCorrect.toFixed(2)],
+    ["Avg log-loss", s.avg_logloss],
+    ["Random baseline", s.random_logloss],
+    ["Log-loss skill", signed(skill)],
   ].map(([k, v]) => `<div class="card"><div class="k">${k}</div><div class="v">${v}</div></div>`).join("");
   const rows = games.map((g) => `<tr class="${g.correct ? "row-won" : "row-lost"}">
       <td>${g.team_a} vs ${g.team_b}</td>
@@ -107,34 +128,40 @@ function renderScorecard(d, history) {
       <div class="chart-box"><div class="chart-title">Log-loss vs random (dashed = ${rnd})</div>${lineChart(ll, { color: "#38bdf8", baseline: rnd })}</div>
     </div>`;
   } else if (scored.length === 1) {
-    charts = intro("📈 The accuracy-over-time chart fills in after a few refreshes (the cron runs every 3h).");
+    charts = intro("Trend charts appear after a few scored snapshots.");
   }
 
-  host.innerHTML = `<h2>Results — how the model is doing</h2>
-    ${intro(`Scoring the model's <b>pre-match</b> predictions (locked before kickoff) against actual results. Lower log-loss is better; below ${s.random_logloss} means it's beating a random guess.`)}
+  const audit = `<div class="audit ${beatRandom ? "good" : "warn"}">
+    <div><span>Probability score</span><strong>${beatRandom ? "Ahead of random" : "Behind random"}</strong></div>
+    <p>Top-pick results are ${Math.abs(deltaGames).toFixed(1)} games ${deltaGames >= 0 ? "above" : "below"} expectation.
+    Draws landed ${Math.abs(drawGap).toFixed(1)} ${drawGap >= 0 ? "more" : "fewer"} times than the model's total draw probability. At ${s.n} games, treat both as early signal.</p>
+  </div>`;
+
+  host.innerHTML = `${sectionHead("Model audit", "Results", `Locked forecasts scored before kickoff. Lower log-loss is better; ${s.random_logloss} is the equal-probability baseline.`, `${s.n} decisions`)}
     <div class="cards">${cards}</div>
+    ${audit}
     ${charts}
-    <table><thead><tr><th>Game</th><th>Model (win/draw/win)</th><th>Model pick</th><th>Actual</th><th></th></tr></thead><tbody>${rows}</tbody></table>`;
+    <div class="table-shell"><table><thead><tr><th>Game</th><th>Model (win/draw/win)</th><th>Top pick</th><th>Actual</th><th></th></tr></thead><tbody>${rows}</tbody></table></div>`;
 }
 
-const VENUE = { polymarket: "🟣 Polymarket", kalshi: "🔵 Kalshi" };
+const VENUE = { polymarket: "Polymarket", kalshi: "Kalshi" };
 
 function renderEdges(d) {
   EDGES = d || EDGES;
   const host = document.getElementById("edges");
   const all = (EDGES && EDGES.opportunities) || [];
   const count = (v) => all.filter((o) => v === "all" || o.platform === v).length;
-  const pills = [["all", `All (${all.length})`], ["polymarket", `${VENUE.polymarket} (${count("polymarket")})`],
-    ["kalshi", `${VENUE.kalshi} (${count("kalshi")})`]]
-    .map(([v, l]) => `<button class="venue-pill ${edgeVenue === v ? "active" : ""}" data-venue="${v}">${l}</button>`).join("");
+  const pills = [["all", "All venues"], ["polymarket", VENUE.polymarket], ["kalshi", VENUE.kalshi]]
+    .map(([v, l]) => `<button class="venue-pill ${edgeVenue === v ? "active" : ""}" data-venue="${v}">
+      <span class="venue-dot ${v}"></span><span>${l}</span><b>${count(v)}</b></button>`).join("");
 
   const ops = all.filter((o) => edgeVenue === "all" || o.platform === edgeVenue);
-  const header = `<h2>Market edges — where the model disagrees with the betting market</h2>
-    ${intro("Contracts where the model's probability differs from the live Kalshi/Polymarket price by enough to matter (after fees/spread). <b>BUY</b> = model thinks it's underpriced; <b>FADE</b> = overpriced. Research only, not betting advice.")}
+  const header = `${sectionHead("Live price comparison", "Market board", "Filtered disagreements after spread, liquidity, and market-prior shrinkage.", `${all.length} qualified gaps`)}
     <div class="venue-filter">${pills}</div>`;
 
   if (!ops.length) {
-    host.innerHTML = header + `<div class="empty">No edges on ${edgeVenue === "all" ? "either venue" : VENUE[edgeVenue]} right now (markets are thin pre-tournament).</div>`;
+    host.innerHTML = header + `<div class="empty">No qualified gaps on ${edgeVenue === "all" ? "either venue" : VENUE[edgeVenue]} in this snapshot.</div>`;
+    bindVenueFilters(host);
     return;
   }
   const rows = ops.map((o) => {
@@ -143,28 +170,31 @@ function renderEdges(d) {
       ? (o.contract || "").replace(/\s*Winner\??$/i, "")
       : (o.market_type ?? "");
     return `<tr>
-      <td><span class="venue ${o.platform}">${o.platform === "kalshi" ? "🔵" : "🟣"}</span> ${o.team ?? o.contract}</td>
+      <td><span class="venue ${o.platform}">${o.platform}</span> ${o.team ?? o.contract}</td>
       <td><span class="tag ${side}">${side}</span></td>
       <td>${market}</td>
       <td>${pct(o.model_prob)}</td>
       <td>${pct(o.market_prob)}</td>
-      <td class="${o.side === "YES" ? "pos" : "neg"}">${signed(o.edge * (o.side === "YES" ? 1 : -1))}</td>
+      <td class="pos">${signed(o.edge)}</td>
       <td>${pct(o.entry_price)}</td>
       <td>${money(o.liquidity)}</td>
     </tr>`;
   }).join("");
   host.innerHTML = header +
-    `<table><thead><tr><th>Contract</th><th>Side</th><th>Market</th><th>Model</th>
-    <th>Market</th><th>Edge</th><th>Entry</th><th>Liquidity</th></tr></thead><tbody>${rows}</tbody></table>`;
+    `<div class="table-shell"><table><thead><tr><th>Contract</th><th>Action</th><th>Market</th><th>Model</th>
+    <th>Market</th><th>Gap</th><th>Entry</th><th>Liquidity</th></tr></thead><tbody>${rows}</tbody></table></div>`;
 
+  bindVenueFilters(host);
+}
+
+function bindVenueFilters(host) {
   host.querySelectorAll("[data-venue]").forEach((b) =>
     b.addEventListener("click", () => { edgeVenue = b.dataset.venue; renderEdges(); }));
 }
 
 function renderPaper(d) {
   const host = document.getElementById("paper");
-  const heading = `<h2>Model bets — automated paper-trading ledger</h2>` +
-    intro("The model bets its own (fake) bankroll on the edges, sized by fractional-Kelly. <b>CLV</b> (closing-line value) tracks whether the price moved its way — the cleanest sign it's finding real value. No real money.");
+  const heading = sectionHead("Paper execution", "Model ledger", "Fractional-Kelly positions opened from qualified market gaps. No real money.");
   if (!d || !d.summary || !d.summary.n_bets) {
     host.innerHTML = heading + `<div class="empty">No open model bets right now — the model opens positions automatically when markets show enough edge. Check back after the next refresh.</div>`;
     return;
@@ -191,11 +221,10 @@ function renderPaper(d) {
       <td>${money(b.stake)}</td>
       <td>${b.status}${b.pnl != null ? " (" + money(b.pnl) + ")" : ""}</td>
     </tr>`).join("");
-  host.innerHTML = `<h2>Model bets — automated paper-trading ledger</h2>
-    ${intro("The model bets its own (fake) bankroll on the edges above, sized by fractional-Kelly. <b>CLV</b> (closing-line value) tracks whether the price moved the model's way — the cleanest sign it's finding real value. No real money.")}
+  host.innerHTML = `${heading}
     <div class="cards">${cards}</div>
-    ${bets.length ? `<table><thead><tr><th>Contract</th><th>Side</th><th>Entry</th>
-    <th>Last</th><th>CLV</th><th>Stake</th><th>Status</th></tr></thead><tbody>${rows}</tbody></table>`
+    ${bets.length ? `<div class="table-shell"><table><thead><tr><th>Contract</th><th>Side</th><th>Entry</th>
+    <th>Last</th><th>CLV</th><th>Stake</th><th>Status</th></tr></thead><tbody>${rows}</tbody></table></div>`
     : `<div class="empty">No positions logged yet.</div>`}`;
 }
 
@@ -229,7 +258,10 @@ async function main() {
     `updated ${m.generated_at || "—"}`
     + `${m.n_matches ? " · " + m.n_matches.toLocaleString() + " matches" : ""}`
     + `${m.n_sims ? " · " + m.n_sims.toLocaleString() + " sims" : ""}`;
-  status.textContent = m.note || "";
+  const failures = Object.keys(data.__errors || {});
+  status.textContent = failures.length
+    ? `Snapshot warning: ${failures.join(", ")} failed to load.`
+    : (m.note || "");
 }
 
 main();

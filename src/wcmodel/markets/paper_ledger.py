@@ -20,6 +20,7 @@ from pathlib import Path
 import pandas as pd
 
 from wcmodel import config
+from wcmodel.json_utils import json_safe
 from wcmodel.markets.paper_trading import position_size
 
 
@@ -39,7 +40,8 @@ class PaperLedger:
 
     # ------------------------------------------------------------------ io --- #
     def save(self) -> None:
-        self.path.write_text(json.dumps(self.data, indent=2))
+        self.data = json_safe(self.data)
+        self.path.write_text(json.dumps(self.data, indent=2, allow_nan=False))
 
     @property
     def bets(self) -> list[dict]:
@@ -93,7 +95,7 @@ class PaperLedger:
                 "contract": o.contract,
                 "team": o.team,
                 "market_type": o.market_type,
-                "round": o.round,
+                "round": None if pd.isna(o.round) else o.round,
                 "side": o.side,
                 "entry_price": float(o.entry_price),
                 "model_prob": float(o.model_prob_side),

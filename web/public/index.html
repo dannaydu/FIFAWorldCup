@@ -3,21 +3,30 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>World Cup 2026 — Model vs Market</title>
+  <title>WC26 Probability Desk</title>
   <link rel="stylesheet" href="styles.css" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>⚽</text></svg>" />
 </head>
 <body>
   <header>
     <div class="wrap">
-      <h1>⚽ World Cup 2026 — Model vs Market</h1>
-      <p class="sub">Probabilistic forecasts vs live Kalshi/Polymarket prices · paper-trading only</p>
+      <div class="mast">
+        <div>
+          <div class="eyebrow">WC26 / Probability Desk</div>
+          <h1>Model <span>vs</span> Market</h1>
+          <p class="sub">Pre-match forecasts, live market gaps, and a paper ledger.</p>
+        </div>
+        <div class="mast-status">
+          <span class="live-dot"></span>
+          <span>snapshot feed</span>
+        </div>
+      </div>
       <nav id="tabs">
-        <button data-tab="play" class="play-tab">🔮 Play</button>
-        <button data-tab="tournament" class="active">📊 Forecast</button>
-        <button data-tab="results">✅ Results</button>
-        <button data-tab="edges">💸 Market edges</button>
-        <button data-tab="paper">🤖 Model bets</button>
+        <button data-tab="play" class="play-tab"><b>01</b> Pick'em</button>
+        <button data-tab="tournament" class="active"><b>02</b> Forecast</button>
+        <button data-tab="results"><b>03</b> Results</button>
+        <button data-tab="edges"><b>04</b> Market board</button>
+        <button data-tab="paper"><b>05</b> Paper ledger</button>
       </nav>
     </div>
   </header>
@@ -33,7 +42,7 @@
 
   <footer class="wrap">
     <span id="meta"></span>
-    <span class="disclaimer">Model output for research. Edges are pre-cost/pre-execution. Not betting advice.</span>
+    <span class="disclaimer">Research model. Paper positions only. Market gaps are pre-execution.</span>
   </footer>
 
   <script src="firebase-config.js"></script>

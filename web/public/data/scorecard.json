@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-15T05:27:19Z",
+  "generated_at": "2026-06-15T06:14:23Z",
   "games": [
     {
       "team_a": "Australia",
@@ -185,8 +185,14 @@
   "summary": {
     "n": 12,
     "accuracy": 0.4167,
+    "expected_accuracy": 0.5704,
+    "expected_correct": 6.85,
+    "accuracy_delta": -0.1538,
     "avg_brier": 0.6687,
     "avg_logloss": 1.0727,
-    "random_logloss": 1.0986
+    "random_logloss": 1.0986,
+    "logloss_skill": 0.0236,
+    "actual_draws": 4,
+    "expected_draws": 2.83
   }
 }

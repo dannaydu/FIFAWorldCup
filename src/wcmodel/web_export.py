@@ -24,6 +24,7 @@ from wcmodel.ingest.get_market_prices import (
     polymarket_world_cup, union_markets,
 )
 from wcmodel.ingest.get_matches import load_matches
+from wcmodel.json_utils import json_safe
 from wcmodel.markets.opportunities import _fixture_key, _parse_fixture, build_opportunities
 from wcmodel.markets.paper_ledger import PaperLedger
 from wcmodel.predictor import train_predictor
@@ -121,12 +122,22 @@ def _scorecard(locked: dict, results: dict, generated_at: str) -> dict:
         })
     games.sort(key=lambda g: (g["team_a"], g["team_b"]))
     n = len(games)
+    expected_correct = sum(g["model_pick_prob"] for g in games)
+    actual_correct = sum(g["correct"] for g in games)
+    actual_draws = sum(g["result"] == "D" for g in games)
+    expected_draws = sum(g["p_draw"] for g in games)
     summary = {
         "n": n,
-        "accuracy": round(sum(g["correct"] for g in games) / n, 4) if n else None,
+        "accuracy": round(actual_correct / n, 4) if n else None,
+        "expected_accuracy": round(expected_correct / n, 4) if n else None,
+        "expected_correct": round(expected_correct, 2) if n else None,
+        "accuracy_delta": round((actual_correct - expected_correct) / n, 4) if n else None,
         "avg_brier": round(sum(g["brier"] for g in games) / n, 4) if n else None,
         "avg_logloss": round(sum(g["logloss"] for g in games) / n, 4) if n else None,
         "random_logloss": round(-math.log(1 / 3), 4),
+        "logloss_skill": round(1 - (sum(g["logloss"] for g in games) / n) / -math.log(1 / 3), 4) if n else None,
+        "actual_draws": actual_draws,
+        "expected_draws": round(expected_draws, 2) if n else None,
     }
     return {"generated_at": generated_at, "games": games, "summary": summary}
 
@@ -173,8 +184,8 @@ def _fetch_markets() -> pd.DataFrame:
 def build_snapshots(*, n_sims: int = 20_000, lam: float = config.MARKET_SHRINKAGE_LAMBDA,
                     update_ledger: bool = True) -> dict[str, dict]:
     generated_at = _now()
-    matches = load_matches()
-    pred = train_predictor(matches)
+    match_history = load_matches()
+    pred = train_predictor(match_history)
     sim = simulate_tournament(pred, GROUPS_2026, n_sims=n_sims, seed=1)
 
     group_of = {t: g for g, ts in GROUPS_2026.items() for t in ts}
@@ -225,7 +236,7 @@ def build_snapshots(*, n_sims: int = 20_000, lam: float = config.MARKET_SHRINKAG
 
     meta = {
         "generated_at": generated_at,
-        "n_matches": int(len(matches)),
+        "n_matches": int(len(match_history)),
         "n_sims": n_sims,
         "lambda": lam,
         "gbm_backend": pred.gbm.backend,
@@ -237,6 +248,6 @@ def build_snapshots(*, n_sims: int = 20_000, lam: float = config.MARKET_SHRINKAG
         "note": "Probabilistic model output. Paper-trading only, pre-cost edges.",
     }
 
-    return {"tournament": tournament, "edges": edges, "matches": matches,
-            "results": results, "scorecard": scorecard, "ledger": ledger_snap,
-            "meta": meta}
+    return json_safe({"tournament": tournament, "edges": edges, "matches": matches,
+                      "results": results, "scorecard": scorecard, "ledger": ledger_snap,
+                      "meta": meta})
