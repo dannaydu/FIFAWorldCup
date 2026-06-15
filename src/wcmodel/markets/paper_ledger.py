@@ -29,7 +29,9 @@ def _now() -> str:
 
 class PaperLedger:
     def __init__(self, path=None, start_bankroll: float = 10_000.0):
-        self.path = Path(path or (config.ARTIFACTS / "paper_ledger.json"))
+        # Tracked (not in gitignored artifacts/) so it persists across cron runs
+        # and CLV / settlements accumulate over the tournament.
+        self.path = Path(path or (config.DATA / "paper_ledger.json"))
         if self.path.exists():
             self.data = json.loads(self.path.read_text())
         else:

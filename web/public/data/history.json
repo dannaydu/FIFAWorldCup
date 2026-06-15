@@ -66,30 +66,30 @@
     }
   },
   {
-    "t": "2026-06-15T04:55:21Z",
+    "t": "2026-06-15T05:12:12Z",
     "champion_top": [
       {
         "team": "Spain",
-        "p": 0.2957
+        "p": 0.3007
       },
       {
         "team": "Argentina",
-        "p": 0.1789
-      },
-      {
-        "team": "England",
-        "p": 0.1263
+        "p": 0.1833
       },
       {
         "team": "France",
-        "p": 0.1085
+        "p": 0.1046
+      },
+      {
+        "team": "England",
+        "p": 0.0997
       },
       {
         "team": "Brazil",
-        "p": 0.0712
+        "p": 0.0747
       }
     ],
-    "n_opportunities": 62,
+    "n_opportunities": 66,
     "scorecard": {
       "n": 12,
       "accuracy": 0.4167,

@@ -1,6 +1,6 @@
 // World Cup 2026 dashboard.
-// Data source: Firestore (collection "snapshots") when firebase-config.js is
-// filled in, otherwise the bundled /data/*.json. Renders three tabs.
+// Data loads from the deployed /data/*.json snapshots (refreshed by the cron).
+// Optional Google sign-in for fantasy cards is handled separately in auth.js.
 
 const DOCS = ["tournament", "edges", "matches", "results", "scorecard", "history", "ledger", "meta"];
 let edgeVenue = "all";   // all | polymarket | kalshi
@@ -36,22 +36,8 @@ const signed = (x) => (x == null ? "—" : (x >= 0 ? "+" : "") + (x * 100).toFix
 const money = (x) => (x == null ? "—" : "$" + Number(x).toLocaleString());
 const el = (html) => { const t = document.createElement("template"); t.innerHTML = html.trim(); return t.content.firstChild; };
 
-const cfg = window.FIREBASE_CONFIG || {};
-const liveMode = cfg.apiKey && cfg.apiKey !== "REPLACE_ME";
-
-async function loadFromFirestore() {
-  const appMod = await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js");
-  const fs = await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js");
-  const app = appMod.initializeApp(cfg);
-  const db = fs.getFirestore(app);
-  const out = {};
-  await Promise.all(DOCS.map(async (name) => {
-    const snap = await fs.getDoc(fs.doc(db, "snapshots", name));
-    out[name] = snap.exists() ? snap.data() : null;
-  }));
-  return out;
-}
-
+// Data always loads from the deployed JSON snapshots (the cron refreshes them).
+// Firebase config (if present) is only used by auth.js for optional sign-in.
 async function loadFromJson() {
   const out = {};
   await Promise.all(DOCS.map(async (name) => {
@@ -177,7 +163,12 @@ function renderEdges(d) {
 
 function renderPaper(d) {
   const host = document.getElementById("paper");
-  if (!d || !d.summary) { host.innerHTML = `<div class="empty">No paper-trading ledger yet. Run <code>python scripts/paper_trade.py</code>.</div>`; return; }
+  const heading = `<h2>Model bets — automated paper-trading ledger</h2>` +
+    intro("The model bets its own (fake) bankroll on the edges, sized by fractional-Kelly. <b>CLV</b> (closing-line value) tracks whether the price moved its way — the cleanest sign it's finding real value. No real money.");
+  if (!d || !d.summary || !d.summary.n_bets) {
+    host.innerHTML = heading + `<div class="empty">No open model bets right now — the model opens positions automatically when markets show enough edge. Check back after the next refresh.</div>`;
+    return;
+  }
   const s = d.summary;
   const cards = [
     ["Open positions", s.open ?? 0],
@@ -220,13 +211,12 @@ function setupTabs() {
 async function main() {
   setupTabs();
   const status = document.getElementById("status");
-  status.textContent = liveMode ? "Loading live data from Firestore…" : "Loading bundled snapshot…";
-  let data;
+  status.textContent = "Loading latest model snapshot…";
+  let data = {};
   try {
-    data = liveMode ? await loadFromFirestore() : await loadFromJson();
-  } catch (e) {
-    status.textContent = "Firestore read failed, falling back to bundled JSON.";
     data = await loadFromJson();
+  } catch (e) {
+    status.textContent = "Couldn't load data — try a refresh.";
   }
   renderTournament(data.tournament);
   renderScorecard(data.scorecard, data.history);
@@ -236,8 +226,9 @@ async function main() {
 
   const m = data.meta || {};
   document.getElementById("meta").textContent =
-    `${liveMode ? "live (Firestore)" : "static snapshot"} · ${m.generated_at || "—"} · `
-    + `${m.n_matches ? m.n_matches.toLocaleString() + " matches · " : ""}${m.n_sims ? m.n_sims.toLocaleString() + " sims" : ""}`;
+    `updated ${m.generated_at || "—"}`
+    + `${m.n_matches ? " · " + m.n_matches.toLocaleString() + " matches" : ""}`
+    + `${m.n_sims ? " · " + m.n_sims.toLocaleString() + " sims" : ""}`;
   status.textContent = m.note || "";
 }
 

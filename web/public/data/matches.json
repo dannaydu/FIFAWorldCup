@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-06-15T04:55:21Z",
+  "generated_at": "2026-06-15T05:12:12Z",
   "fixtures": [
     {
       "key": "KXWCGAME-26JUN11MEXRSA",
       "date": "2026-06-11",
       "team_a": "Mexico",
       "team_b": "South Africa",
-      "p_a": 0.8301,
-      "p_draw": 0.1283,
-      "p_b": 0.0416,
+      "p_a": 0.8238,
+      "p_draw": 0.1208,
+      "p_b": 0.0554,
       "result": null
     },
     {
@@ -16,9 +16,9 @@
       "date": "2026-06-11",
       "team_a": "South Korea",
       "team_b": "Czech Republic",
-      "p_a": 0.424,
-      "p_draw": 0.3175,
-      "p_b": 0.2585,
+      "p_a": 0.3284,
+      "p_draw": 0.3104,
+      "p_b": 0.3612,
       "result": null
     },
     {
@@ -26,9 +26,9 @@
       "date": "2026-06-12",
       "team_a": "Canada",
       "team_b": "Bosnia and Herzegovina",
-      "p_a": 0.5985,
-      "p_draw": 0.2749,
-      "p_b": 0.1266,
+      "p_a": 0.7321,
+      "p_draw": 0.1762,
+      "p_b": 0.0917,
       "result": null
     },
     {
@@ -36,9 +36,9 @@
       "date": "2026-06-12",
       "team_a": "United States",
       "team_b": "Paraguay",
-      "p_a": 0.564,
-      "p_draw": 0.2959,
-      "p_b": 0.1401,
+      "p_a": 0.3542,
+      "p_draw": 0.3753,
+      "p_b": 0.2705,
       "result": null
     },
     {
@@ -46,9 +46,9 @@
       "date": "2026-06-13",
       "team_a": "Brazil",
       "team_b": "Morocco",
-      "p_a": 0.4728,
-      "p_draw": 0.2672,
-      "p_b": 0.26,
+      "p_a": 0.5167,
+      "p_draw": 0.2562,
+      "p_b": 0.227,
       "result": null
     },
     {
@@ -56,9 +56,9 @@
       "date": "2026-06-13",
       "team_a": "Haiti",
       "team_b": "Scotland",
-      "p_a": 0.1731,
-      "p_draw": 0.2806,
-      "p_b": 0.5463,
+      "p_a": 0.2048,
+      "p_draw": 0.3012,
+      "p_b": 0.494,
       "result": null
     },
     {
@@ -66,9 +66,9 @@
       "date": "2026-06-13",
       "team_a": "Qatar",
       "team_b": "Switzerland",
-      "p_a": 0.0953,
-      "p_draw": 0.183,
-      "p_b": 0.7217,
+      "p_a": 0.0726,
+      "p_draw": 0.1695,
+      "p_b": 0.7579,
       "result": null
     },
     {
@@ -76,9 +76,9 @@
       "date": "2026-06-14",
       "team_a": "Australia",
       "team_b": "Turkey",
-      "p_a": 0.3284,
-      "p_draw": 0.2444,
-      "p_b": 0.4272,
+      "p_a": 0.2667,
+      "p_draw": 0.2906,
+      "p_b": 0.4427,
       "result": null
     },
     {
@@ -86,9 +86,9 @@
       "date": "2026-06-14",
       "team_a": "Germany",
       "team_b": "Cura\u00e7ao",
-      "p_a": 0.8112,
-      "p_draw": 0.1493,
-      "p_b": 0.0396,
+      "p_a": 0.8564,
+      "p_draw": 0.1027,
+      "p_b": 0.0409,
       "result": null
     },
     {
@@ -96,9 +96,9 @@
       "date": "2026-06-14",
       "team_a": "Ivory Coast",
       "team_b": "Ecuador",
-      "p_a": 0.2598,
-      "p_draw": 0.2742,
-      "p_b": 0.4661,
+      "p_a": 0.2582,
+      "p_draw": 0.3074,
+      "p_b": 0.4343,
       "result": null
     },
     {
@@ -106,9 +106,9 @@
       "date": "2026-06-14",
       "team_a": "Netherlands",
       "team_b": "Japan",
-      "p_a": 0.4806,
-      "p_draw": 0.2246,
-      "p_b": 0.2948,
+      "p_a": 0.5015,
+      "p_draw": 0.2025,
+      "p_b": 0.296,
       "result": null
     },
     {
@@ -116,9 +116,9 @@
       "date": "2026-06-14",
       "team_a": "Sweden",
       "team_b": "Tunisia",
-      "p_a": 0.4107,
-      "p_draw": 0.2784,
-      "p_b": 0.3108,
+      "p_a": 0.4217,
+      "p_draw": 0.2757,
+      "p_b": 0.3026,
       "result": null
     },
     {
@@ -126,9 +126,9 @@
       "date": "2026-06-15",
       "team_a": "Belgium",
       "team_b": "Egypt",
-      "p_a": 0.5499,
-      "p_draw": 0.2787,
-      "p_b": 0.1715,
+      "p_a": 0.566,
+      "p_draw": 0.2433,
+      "p_b": 0.1907,
       "result": null
     },
     {
@@ -136,9 +136,9 @@
       "date": "2026-06-15",
       "team_a": "Iran",
       "team_b": "New Zealand",
-      "p_a": 0.6205,
-      "p_draw": 0.2005,
-      "p_b": 0.179,
+      "p_a": 0.6206,
+      "p_draw": 0.1978,
+      "p_b": 0.1817,
       "result": null
     },
     {
@@ -146,9 +146,9 @@
       "date": "2026-06-15",
       "team_a": "Saudi Arabia",
       "team_b": "Uruguay",
-      "p_a": 0.1049,
-      "p_draw": 0.2246,
-      "p_b": 0.6705,
+      "p_a": 0.1123,
+      "p_draw": 0.2383,
+      "p_b": 0.6494,
       "result": null
     },
     {
@@ -156,9 +156,9 @@
       "date": "2026-06-15",
       "team_a": "Spain",
       "team_b": "Cape Verde",
-      "p_a": 0.8601,
-      "p_draw": 0.1145,
-      "p_b": 0.0254,
+      "p_a": 0.8748,
+      "p_draw": 0.0936,
+      "p_b": 0.0316,
       "result": null
     },
     {
@@ -166,9 +166,9 @@
       "date": "2026-06-16",
       "team_a": "Argentina",
       "team_b": "Algeria",
-      "p_a": 0.683,
-      "p_draw": 0.196,
-      "p_b": 0.121,
+      "p_a": 0.6943,
+      "p_draw": 0.1827,
+      "p_b": 0.123,
       "result": null
     },
     {
@@ -176,9 +176,9 @@
       "date": "2026-06-16",
       "team_a": "France",
       "team_b": "Senegal",
-      "p_a": 0.6301,
-      "p_draw": 0.2063,
-      "p_b": 0.1636,
+      "p_a": 0.5305,
+      "p_draw": 0.2773,
+      "p_b": 0.1922,
       "result": null
     },
     {
@@ -186,9 +186,9 @@
       "date": "2026-06-16",
       "team_a": "Iraq",
       "team_b": "Norway",
-      "p_a": 0.118,
-      "p_draw": 0.2171,
-      "p_b": 0.6649,
+      "p_a": 0.1371,
+      "p_draw": 0.2427,
+      "p_b": 0.6202,
       "result": null
     },
     {
@@ -196,9 +196,9 @@
       "date": "2026-06-17",
       "team_a": "Austria",
       "team_b": "Jordan",
-      "p_a": 0.5395,
-      "p_draw": 0.2583,
-      "p_b": 0.2022,
+      "p_a": 0.5495,
+      "p_draw": 0.2424,
+      "p_b": 0.2081,
       "result": null
     },
     {
@@ -206,9 +206,9 @@
       "date": "2026-06-17",
       "team_a": "England",
       "team_b": "Croatia",
-      "p_a": 0.5835,
-      "p_draw": 0.2454,
-      "p_b": 0.1711,
+      "p_a": 0.4628,
+      "p_draw": 0.331,
+      "p_b": 0.2062,
       "result": null
     },
     {
@@ -216,9 +216,9 @@
       "date": "2026-06-17",
       "team_a": "Ghana",
       "team_b": "Panama",
-      "p_a": 0.227,
-      "p_draw": 0.2838,
-      "p_b": 0.4892,
+      "p_a": 0.2161,
+      "p_draw": 0.2854,
+      "p_b": 0.4985,
       "result": null
     },
     {
@@ -226,9 +226,9 @@
       "date": "2026-06-17",
       "team_a": "Portugal",
       "team_b": "DR Congo",
-      "p_a": 0.641,
-      "p_draw": 0.2432,
-      "p_b": 0.1158,
+      "p_a": 0.6197,
+      "p_draw": 0.2752,
+      "p_b": 0.1051,
       "result": null
     },
     {
@@ -236,9 +236,9 @@
       "date": "2026-06-17",
       "team_a": "Uzbekistan",
       "team_b": "Colombia",
-      "p_a": 0.1284,
-      "p_draw": 0.2475,
-      "p_b": 0.6242,
+      "p_a": 0.1319,
+      "p_draw": 0.2707,
+      "p_b": 0.5974,
       "result": null
     },
     {
@@ -246,9 +246,9 @@
       "date": "2026-06-18",
       "team_a": "Canada",
       "team_b": "Qatar",
-      "p_a": 0.7879,
-      "p_draw": 0.1525,
-      "p_b": 0.0595,
+      "p_a": 0.8102,
+      "p_draw": 0.1411,
+      "p_b": 0.0487,
       "result": null
     },
     {
@@ -256,9 +256,9 @@
       "date": "2026-06-18",
       "team_a": "Czech Republic",
       "team_b": "South Africa",
-      "p_a": 0.5466,
-      "p_draw": 0.236,
-      "p_b": 0.2174,
+      "p_a": 0.5344,
+      "p_draw": 0.2492,
+      "p_b": 0.2164,
       "result": null
     },
     {
@@ -266,9 +266,9 @@
       "date": "2026-06-18",
       "team_a": "Mexico",
       "team_b": "South Korea",
-      "p_a": 0.5934,
-      "p_draw": 0.2492,
-      "p_b": 0.1575,
+      "p_a": 0.6293,
+      "p_draw": 0.2286,
+      "p_b": 0.1422,
       "result": null
     },
     {
@@ -276,9 +276,9 @@
       "date": "2026-06-18",
       "team_a": "Switzerland",
       "team_b": "Bosnia and Herzegovina",
-      "p_a": 0.6853,
-      "p_draw": 0.2205,
-      "p_b": 0.0942,
+      "p_a": 0.7426,
+      "p_draw": 0.1701,
+      "p_b": 0.0873,
       "result": null
     },
     {
@@ -286,9 +286,9 @@
       "date": "2026-06-19",
       "team_a": "Brazil",
       "team_b": "Haiti",
-      "p_a": 0.7405,
-      "p_draw": 0.1843,
-      "p_b": 0.0752,
+      "p_a": 0.8116,
+      "p_draw": 0.1196,
+      "p_b": 0.0688,
       "result": null
     },
     {
@@ -296,9 +296,9 @@
       "date": "2026-06-19",
       "team_a": "Scotland",
       "team_b": "Morocco",
-      "p_a": 0.1671,
-      "p_draw": 0.266,
-      "p_b": 0.5669,
+      "p_a": 0.1883,
+      "p_draw": 0.2828,
+      "p_b": 0.5289,
       "result": null
     },
     {
@@ -306,9 +306,9 @@
       "date": "2026-06-19",
       "team_a": "Turkey",
       "team_b": "Paraguay",
-      "p_a": 0.463,
-      "p_draw": 0.2776,
-      "p_b": 0.2594,
+      "p_a": 0.452,
+      "p_draw": 0.295,
+      "p_b": 0.253,
       "result": null
     },
     {
@@ -316,9 +316,9 @@
       "date": "2026-06-19",
       "team_a": "United States",
       "team_b": "Australia",
-      "p_a": 0.4756,
-      "p_draw": 0.2787,
-      "p_b": 0.2457,
+      "p_a": 0.448,
+      "p_draw": 0.2905,
+      "p_b": 0.2615,
       "result": null
     },
     {
@@ -326,9 +326,9 @@
       "date": "2026-06-20",
       "team_a": "Ecuador",
       "team_b": "Cura\u00e7ao",
-      "p_a": 0.831,
-      "p_draw": 0.1179,
-      "p_b": 0.0511,
+      "p_a": 0.8219,
+      "p_draw": 0.1233,
+      "p_b": 0.0548,
       "result": null
     },
     {
@@ -336,9 +336,9 @@
       "date": "2026-06-20",
       "team_a": "Germany",
       "team_b": "Ivory Coast",
-      "p_a": 0.6343,
-      "p_draw": 0.215,
-      "p_b": 0.1507,
+      "p_a": 0.5859,
+      "p_draw": 0.2405,
+      "p_b": 0.1736,
       "result": null
     },
     {
@@ -346,9 +346,9 @@
       "date": "2026-06-20",
       "team_a": "Netherlands",
       "team_b": "Sweden",
-      "p_a": 0.6862,
-      "p_draw": 0.1937,
-      "p_b": 0.1201,
+      "p_a": 0.6204,
+      "p_draw": 0.1972,
+      "p_b": 0.1824,
       "result": null
     },
     {
@@ -356,9 +356,9 @@
       "date": "2026-06-21",
       "team_a": "Belgium",
       "team_b": "Iran",
-      "p_a": 0.5744,
-      "p_draw": 0.1931,
-      "p_b": 0.2324,
+      "p_a": 0.5833,
+      "p_draw": 0.204,
+      "p_b": 0.2128,
       "result": null
     },
     {
@@ -366,9 +366,9 @@
       "date": "2026-06-21",
       "team_a": "New Zealand",
       "team_b": "Egypt",
-      "p_a": 0.2085,
-      "p_draw": 0.2476,
-      "p_b": 0.5439,
+      "p_a": 0.1978,
+      "p_draw": 0.2522,
+      "p_b": 0.55,
       "result": null
     },
     {
@@ -376,9 +376,9 @@
       "date": "2026-06-21",
       "team_a": "Spain",
       "team_b": "Saudi Arabia",
-      "p_a": 0.8703,
-      "p_draw": 0.0945,
-      "p_b": 0.0352,
+      "p_a": 0.8897,
+      "p_draw": 0.0794,
+      "p_b": 0.0309,
       "result": null
     },
     {
@@ -386,9 +386,9 @@
       "date": "2026-06-21",
       "team_a": "Tunisia",
       "team_b": "Japan",
-      "p_a": 0.1062,
-      "p_draw": 0.2752,
-      "p_b": 0.6186,
+      "p_a": 0.1046,
+      "p_draw": 0.2751,
+      "p_b": 0.6203,
       "result": null
     },
     {
@@ -396,9 +396,9 @@
       "date": "2026-06-21",
       "team_a": "Uruguay",
       "team_b": "Cape Verde",
-      "p_a": 0.7383,
-      "p_draw": 0.1712,
-      "p_b": 0.0905,
+      "p_a": 0.7359,
+      "p_draw": 0.175,
+      "p_b": 0.0891,
       "result": null
     },
     {
@@ -406,9 +406,9 @@
       "date": "2026-06-22",
       "team_a": "Argentina",
       "team_b": "Austria",
-      "p_a": 0.7091,
-      "p_draw": 0.1885,
-      "p_b": 0.1024,
+      "p_a": 0.7233,
+      "p_draw": 0.175,
+      "p_b": 0.1017,
       "result": null
     },
     {
@@ -416,9 +416,9 @@
       "date": "2026-06-22",
       "team_a": "France",
       "team_b": "Iraq",
-      "p_a": 0.7743,
-      "p_draw": 0.16,
-      "p_b": 0.0657,
+      "p_a": 0.771,
+      "p_draw": 0.1631,
+      "p_b": 0.0659,
       "result": null
     },
     {
@@ -426,9 +426,9 @@
       "date": "2026-06-22",
       "team_a": "Jordan",
       "team_b": "Algeria",
-      "p_a": 0.1889,
-      "p_draw": 0.2245,
-      "p_b": 0.5866,
+      "p_a": 0.206,
+      "p_draw": 0.301,
+      "p_b": 0.4931,
       "result": null
     },
     {
@@ -436,9 +436,9 @@
       "date": "2026-06-22",
       "team_a": "Norway",
       "team_b": "Senegal",
-      "p_a": 0.5711,
-      "p_draw": 0.1902,
-      "p_b": 0.2386,
+      "p_a": 0.4954,
+      "p_draw": 0.2457,
+      "p_b": 0.2588,
       "result": null
     },
     {
@@ -446,9 +446,9 @@
       "date": "2026-06-23",
       "team_a": "Colombia",
       "team_b": "DR Congo",
-      "p_a": 0.7335,
-      "p_draw": 0.1798,
-      "p_b": 0.0867,
+      "p_a": 0.7377,
+      "p_draw": 0.1658,
+      "p_b": 0.0965,
       "result": null
     },
     {
@@ -456,9 +456,9 @@
       "date": "2026-06-23",
       "team_a": "England",
       "team_b": "Ghana",
-      "p_a": 0.7471,
-      "p_draw": 0.2084,
-      "p_b": 0.0445,
+      "p_a": 0.8088,
+      "p_draw": 0.1427,
+      "p_b": 0.0486,
       "result": null
     },
     {
@@ -466,9 +466,9 @@
       "date": "2026-06-23",
       "team_a": "Panama",
       "team_b": "Croatia",
-      "p_a": 0.1518,
-      "p_draw": 0.2445,
-      "p_b": 0.6037,
+      "p_a": 0.1668,
+      "p_draw": 0.2638,
+      "p_b": 0.5694,
       "result": null
     },
     {
@@ -476,9 +476,9 @@
       "date": "2026-06-23",
       "team_a": "Portugal",
       "team_b": "Uzbekistan",
-      "p_a": 0.6906,
-      "p_draw": 0.1671,
-      "p_b": 0.1423,
+      "p_a": 0.7039,
+      "p_draw": 0.169,
+      "p_b": 0.1271,
       "result": null
     },
     {
@@ -486,9 +486,9 @@
       "date": "2026-06-24",
       "team_a": "Bosnia and Herzegovina",
       "team_b": "Qatar",
-      "p_a": 0.5452,
-      "p_draw": 0.2687,
-      "p_b": 0.1861,
+      "p_a": 0.548,
+      "p_draw": 0.2332,
+      "p_b": 0.2188,
       "result": null
     },
     {
@@ -496,9 +496,9 @@
       "date": "2026-06-24",
       "team_a": "Czech Republic",
       "team_b": "Mexico",
-      "p_a": 0.1931,
-      "p_draw": 0.2342,
-      "p_b": 0.5727,
+      "p_a": 0.2145,
+      "p_draw": 0.2451,
+      "p_b": 0.5405,
       "result": null
     },
     {
@@ -506,9 +506,9 @@
       "date": "2026-06-24",
       "team_a": "Morocco",
       "team_b": "Haiti",
-      "p_a": 0.7739,
-      "p_draw": 0.156,
-      "p_b": 0.0702,
+      "p_a": 0.7438,
+      "p_draw": 0.176,
+      "p_b": 0.0802,
       "result": null
     },
     {
@@ -516,9 +516,9 @@
       "date": "2026-06-24",
       "team_a": "Scotland",
       "team_b": "Brazil",
-      "p_a": 0.129,
-      "p_draw": 0.2808,
-      "p_b": 0.5901,
+      "p_a": 0.1265,
+      "p_draw": 0.3026,
+      "p_b": 0.5709,
       "result": null
     },
     {
@@ -526,9 +526,9 @@
       "date": "2026-06-24",
       "team_a": "South Africa",
       "team_b": "South Korea",
-      "p_a": 0.1265,
-      "p_draw": 0.2686,
-      "p_b": 0.6049,
+      "p_a": 0.1631,
+      "p_draw": 0.2773,
+      "p_b": 0.5595,
       "result": null
     },
     {
@@ -536,9 +536,9 @@
       "date": "2026-06-24",
       "team_a": "Switzerland",
       "team_b": "Canada",
-      "p_a": 0.5929,
-      "p_draw": 0.2024,
-      "p_b": 0.2047,
+      "p_a": 0.5882,
+      "p_draw": 0.2125,
+      "p_b": 0.1993,
       "result": null
     },
     {
@@ -546,9 +546,9 @@
       "date": "2026-06-25",
       "team_a": "Cura\u00e7ao",
       "team_b": "Ivory Coast",
-      "p_a": 0.1395,
-      "p_draw": 0.2888,
-      "p_b": 0.5717,
+      "p_a": 0.1396,
+      "p_draw": 0.2988,
+      "p_b": 0.5616,
       "result": null
     },
     {
@@ -556,9 +556,9 @@
       "date": "2026-06-25",
       "team_a": "Ecuador",
       "team_b": "Germany",
-      "p_a": 0.2744,
-      "p_draw": 0.2709,
-      "p_b": 0.4548,
+      "p_a": 0.3214,
+      "p_draw": 0.2855,
+      "p_b": 0.3931,
       "result": null
     },
     {
@@ -566,9 +566,9 @@
       "date": "2026-06-25",
       "team_a": "Japan",
       "team_b": "Sweden",
-      "p_a": 0.5348,
-      "p_draw": 0.2555,
-      "p_b": 0.2096,
+      "p_a": 0.6138,
+      "p_draw": 0.231,
+      "p_b": 0.1553,
       "result": null
     },
     {
@@ -576,9 +576,9 @@
       "date": "2026-06-25",
       "team_a": "Paraguay",
       "team_b": "Australia",
-      "p_a": 0.4373,
-      "p_draw": 0.2265,
-      "p_b": 0.3362,
+      "p_a": 0.4753,
+      "p_draw": 0.2344,
+      "p_b": 0.2903,
       "result": null
     },
     {
@@ -586,9 +586,9 @@
       "date": "2026-06-25",
       "team_a": "Tunisia",
       "team_b": "Netherlands",
-      "p_a": 0.1147,
-      "p_draw": 0.1513,
-      "p_b": 0.7341,
+      "p_a": 0.118,
+      "p_draw": 0.164,
+      "p_b": 0.718,
       "result": null
     },
     {
@@ -596,9 +596,9 @@
       "date": "2026-06-25",
       "team_a": "Turkey",
       "team_b": "United States",
-      "p_a": 0.4361,
-      "p_draw": 0.2478,
-      "p_b": 0.316,
+      "p_a": 0.551,
+      "p_draw": 0.2362,
+      "p_b": 0.2128,
       "result": null
     },
     {
@@ -606,9 +606,9 @@
       "date": "2026-06-26",
       "team_a": "Cape Verde",
       "team_b": "Saudi Arabia",
-      "p_a": 0.356,
-      "p_draw": 0.3054,
-      "p_b": 0.3386,
+      "p_a": 0.3509,
+      "p_draw": 0.3101,
+      "p_b": 0.339,
       "result": null
     },
     {
@@ -616,9 +616,9 @@
       "date": "2026-06-26",
       "team_a": "Egypt",
       "team_b": "Iran",
-      "p_a": 0.3419,
-      "p_draw": 0.305,
-      "p_b": 0.353,
+      "p_a": 0.3713,
+      "p_draw": 0.3157,
+      "p_b": 0.313,
       "result": null
     },
     {
@@ -626,9 +626,9 @@
       "date": "2026-06-26",
       "team_a": "New Zealand",
       "team_b": "Belgium",
-      "p_a": 0.1298,
-      "p_draw": 0.2133,
-      "p_b": 0.6569,
+      "p_a": 0.1202,
+      "p_draw": 0.2143,
+      "p_b": 0.6655,
       "result": null
     },
     {
@@ -636,9 +636,9 @@
       "date": "2026-06-26",
       "team_a": "Norway",
       "team_b": "France",
-      "p_a": 0.265,
-      "p_draw": 0.2552,
-      "p_b": 0.4799,
+      "p_a": 0.1923,
+      "p_draw": 0.3573,
+      "p_b": 0.4504,
       "result": null
     },
     {
@@ -646,9 +646,9 @@
       "date": "2026-06-26",
       "team_a": "Senegal",
       "team_b": "Iraq",
-      "p_a": 0.5991,
-      "p_draw": 0.2398,
-      "p_b": 0.1611,
+      "p_a": 0.5905,
+      "p_draw": 0.2518,
+      "p_b": 0.1577,
       "result": null
     },
     {
@@ -656,9 +656,9 @@
       "date": "2026-06-26",
       "team_a": "Uruguay",
       "team_b": "Spain",
-      "p_a": 0.1185,
-      "p_draw": 0.2621,
-      "p_b": 0.6194,
+      "p_a": 0.1247,
+      "p_draw": 0.2375,
+      "p_b": 0.6378,
       "result": null
     },
     {
@@ -666,9 +666,9 @@
       "date": "2026-06-27",
       "team_a": "Algeria",
       "team_b": "Austria",
-      "p_a": 0.3475,
-      "p_draw": 0.2873,
-      "p_b": 0.3652,
+      "p_a": 0.343,
+      "p_draw": 0.3163,
+      "p_b": 0.3407,
       "result": null
     },
     {
@@ -676,9 +676,9 @@
       "date": "2026-06-27",
       "team_a": "Colombia",
       "team_b": "Portugal",
-      "p_a": 0.2814,
-      "p_draw": 0.2804,
-      "p_b": 0.4382,
+      "p_a": 0.3238,
+      "p_draw": 0.2051,
+      "p_b": 0.4711,
       "result": null
     },
     {
@@ -686,9 +686,9 @@
       "date": "2026-06-27",
       "team_a": "Croatia",
       "team_b": "Ghana",
-      "p_a": 0.6731,
-      "p_draw": 0.2317,
-      "p_b": 0.0952,
+      "p_a": 0.661,
+      "p_draw": 0.2455,
+      "p_b": 0.0934,
       "result": null
     },
     {
@@ -696,9 +696,9 @@
       "date": "2026-06-27",
       "team_a": "DR Congo",
       "team_b": "Uzbekistan",
-      "p_a": 0.3429,
-      "p_draw": 0.3074,
-      "p_b": 0.3497,
+      "p_a": 0.3548,
+      "p_draw": 0.326,
+      "p_b": 0.3192,
       "result": null
     },
     {
@@ -706,9 +706,9 @@
       "date": "2026-06-27",
       "team_a": "Jordan",
       "team_b": "Argentina",
-      "p_a": 0.0565,
-      "p_draw": 0.1324,
-      "p_b": 0.8111,
+      "p_a": 0.0569,
+      "p_draw": 0.1461,
+      "p_b": 0.797,
       "result": null
     },
     {
@@ -716,9 +716,9 @@
       "date": "2026-06-27",
       "team_a": "Panama",
       "team_b": "England",
-      "p_a": 0.1036,
-      "p_draw": 0.1881,
-      "p_b": 0.7083,
+      "p_a": 0.1039,
+      "p_draw": 0.192,
+      "p_b": 0.7041,
       "result": null
     }
   ]

@@ -1,16 +1,14 @@
-// Firebase web config.
+// Firebase WEB config — PUBLIC by design (these identify the project; security
+// is enforced by Firestore rules, not by hiding these values). Safe to commit.
 //
-// LOCAL/STATIC MODE (default): leave apiKey as "REPLACE_ME". The app reads the
-// bundled JSON in /data and works immediately once hosted — no credentials.
-//
-// LIVE MODE: paste your Firebase web app config here (Firebase console ->
-// Project settings -> General -> Your apps -> Web app -> SDK setup). The app
-// will then read live from Firestore (collection "snapshots") instead of JSON.
+// Used only for optional Google sign-in / cloud-saved fantasy cards (see auth.js).
+// Forecast/results/edges data always loads from the deployed JSON snapshots.
 window.FIREBASE_CONFIG = {
-  apiKey: "REPLACE_ME",
-  authDomain: "REPLACE_ME.firebaseapp.com",
-  projectId: "REPLACE_ME",
-  storageBucket: "REPLACE_ME.appspot.com",
-  messagingSenderId: "REPLACE_ME",
-  appId: "REPLACE_ME",
+  apiKey: "AIzaSyCS7GJzJbsoMT9FN3rG5Z_X9cgkBD0vjnU",
+  authDomain: "fifa-3b360.firebaseapp.com",
+  projectId: "fifa-3b360",
+  storageBucket: "fifa-3b360.firebasestorage.app",
+  messagingSenderId: "1011104722574",
+  appId: "1:1011104722574:web:06a940bb36285a078f63df",
+  measurementId: "G-0XQCGFRGWZ",
 };
