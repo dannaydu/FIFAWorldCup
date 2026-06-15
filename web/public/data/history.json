@@ -64,5 +64,38 @@
       "avg_logloss": 1.0727,
       "random_logloss": 1.0986
     }
+  },
+  {
+    "t": "2026-06-15T04:55:21Z",
+    "champion_top": [
+      {
+        "team": "Spain",
+        "p": 0.2957
+      },
+      {
+        "team": "Argentina",
+        "p": 0.1789
+      },
+      {
+        "team": "England",
+        "p": 0.1263
+      },
+      {
+        "team": "France",
+        "p": 0.1085
+      },
+      {
+        "team": "Brazil",
+        "p": 0.0712
+      }
+    ],
+    "n_opportunities": 62,
+    "scorecard": {
+      "n": 12,
+      "accuracy": 0.4167,
+      "avg_brier": 0.6687,
+      "avg_logloss": 1.0727,
+      "random_logloss": 1.0986
+    }
   }
 ]

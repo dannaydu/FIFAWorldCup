@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-06-15T04:22:51Z",
+  "generated_at": "2026-06-15T04:55:21Z",
   "n_matches": 2,
   "n_sims": 20000,
   "lambda": 0.5,
-  "gbm_backend": "sklearn-hist",
+  "gbm_backend": "lightgbm",
   "n_live_contracts": 1205,
-  "n_opportunities": 68,
+  "n_opportunities": 62,
   "n_fixtures": 72,
   "n_results": 12,
   "scorecard": {
