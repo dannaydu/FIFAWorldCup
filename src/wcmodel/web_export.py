@@ -7,11 +7,18 @@ call this so the two stay in sync.
 """
 from __future__ import annotations
 
+import json
+import math
 import time
 
 import pandas as pd
 
 from wcmodel import config
+
+# Persistent state: model predictions locked at first sighting (pre-kickoff),
+# so the scorecard stays a fair out-of-sample test even if results later land in
+# the training mirror.
+_LOCKED_PATH = config.DATA / "locked_predictions.json"
 from wcmodel.ingest.get_market_prices import (
     all_resolutions, kalshi_resolutions, kalshi_series, polymarket_results,
     polymarket_world_cup, union_markets,
@@ -67,6 +74,61 @@ def game_results() -> dict[str, str]:
     res = _match_results()
     res.update(polymarket_results())   # {"grp:<L>": team, "champion": team}
     return res
+
+
+def _lock_predictions(fixtures: list[dict], generated_at: str) -> dict:
+    """Lock each fixture's first-seen model prediction; returns the full store."""
+    try:
+        locked = json.loads(_LOCKED_PATH.read_text()) if _LOCKED_PATH.exists() else {}
+    except Exception:
+        locked = {}
+    changed = False
+    for f in fixtures:
+        if f["key"] not in locked:
+            locked[f["key"]] = {
+                "team_a": f["team_a"], "team_b": f["team_b"],
+                "p_a": f["p_a"], "p_draw": f["p_draw"], "p_b": f["p_b"],
+                "locked_at": generated_at,
+            }
+            changed = True
+    if changed:
+        _LOCKED_PATH.write_text(json.dumps(locked, indent=2))
+    return locked
+
+
+def _scorecard(locked: dict, results: dict, generated_at: str) -> dict:
+    """Score locked pre-match predictions against actual results (completed games)."""
+    games = []
+    for mid, res in results.items():
+        if not mid.startswith("m:"):
+            continue
+        lp = locked.get(mid[2:])
+        if not lp or res not in ("A", "D", "B"):
+            continue
+        probs = {"A": lp["p_a"], "D": lp["p_draw"], "B": lp["p_b"]}
+        pick = max(probs, key=probs.get)
+        p_res = min(max(probs[res], 1e-9), 1.0)
+        brier = sum((probs[k] - (1.0 if k == res else 0.0)) ** 2 for k in probs)
+        label = {"A": lp["team_a"], "B": lp["team_b"], "D": "Draw"}
+        games.append({
+            "team_a": lp["team_a"], "team_b": lp["team_b"],
+            "p_a": lp["p_a"], "p_draw": lp["p_draw"], "p_b": lp["p_b"],
+            "result": res, "result_label": label[res],
+            "model_pick": pick, "model_pick_label": label[pick],
+            "model_pick_prob": round(probs[pick], 4),
+            "correct": pick == res,
+            "brier": round(brier, 4), "logloss": round(-math.log(p_res), 4),
+        })
+    games.sort(key=lambda g: (g["team_a"], g["team_b"]))
+    n = len(games)
+    summary = {
+        "n": n,
+        "accuracy": round(sum(g["correct"] for g in games) / n, 4) if n else None,
+        "avg_brier": round(sum(g["brier"] for g in games) / n, 4) if n else None,
+        "avg_logloss": round(sum(g["logloss"] for g in games) / n, 4) if n else None,
+        "random_logloss": round(-math.log(1 / 3), 4),
+    }
+    return {"generated_at": generated_at, "games": games, "summary": summary}
 
 
 def _build_fixtures(market: pd.DataFrame, predictor) -> list[dict]:
@@ -140,8 +202,15 @@ def build_snapshots(*, n_sims: int = 20_000, lam: float = config.MARKET_SHRINKAG
         "opportunities": opps.to_dict(orient="records") if not opps.empty else [],
     }
 
-    matches = {"generated_at": generated_at, "fixtures": _build_fixtures(market, pred)}
-    results = {"generated_at": generated_at, "markets": game_results()}
+    # Fixtures for the game/scorecard include settled matches too (completed
+    # games), so the model's locked prediction can be scored against results.
+    settled_matches = kalshi_series("KXWCGAME", market_type="match", status="settled")
+    fixtures = _build_fixtures(union_markets([market, settled_matches]), pred)
+    matches = {"generated_at": generated_at, "fixtures": fixtures}
+    results_map = game_results()
+    results = {"generated_at": generated_at, "markets": results_map}
+    locked = _lock_predictions(fixtures, generated_at)
+    scorecard = _scorecard(locked, results_map, generated_at)
 
     ledger = PaperLedger()
     if update_ledger and not market.empty:
@@ -164,8 +233,10 @@ def build_snapshots(*, n_sims: int = 20_000, lam: float = config.MARKET_SHRINKAG
         "n_opportunities": int(len(opps)),
         "n_fixtures": len(matches["fixtures"]),
         "n_results": len(results["markets"]),
+        "scorecard": scorecard["summary"],
         "note": "Probabilistic model output. Paper-trading only, pre-cost edges.",
     }
 
     return {"tournament": tournament, "edges": edges, "matches": matches,
-            "results": results, "ledger": ledger_snap, "meta": meta}
+            "results": results, "scorecard": scorecard, "ledger": ledger_snap,
+            "meta": meta}

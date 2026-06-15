@@ -26,6 +26,23 @@ def main() -> None:
     for name, doc in snaps.items():
         (OUT / f"{name}.json").write_text(json.dumps(doc, indent=2))
         print(f"  wrote {OUT / f'{name}.json'}")
+
+    # Append a compact, time-stamped history row — saved on every refresh.
+    hist_path = OUT / "history.json"
+    try:
+        hist = json.loads(hist_path.read_text())
+    except Exception:
+        hist = []
+    champ = sorted(snaps["tournament"]["teams"], key=lambda t: -t["p_champion"])[:5]
+    hist.append({
+        "t": snaps["meta"]["generated_at"],
+        "champion_top": [{"team": c["team"], "p": c["p_champion"]} for c in champ],
+        "n_opportunities": snaps["meta"]["n_opportunities"],
+        "scorecard": snaps["scorecard"]["summary"],
+    })
+    hist = hist[-300:]
+    hist_path.write_text(json.dumps(hist, indent=2))
+    print(f"  appended history.json ({len(hist)} snapshots)")
     print("Done. Run `firebase deploy` (or open web/public/index.html) to view.")
 
 

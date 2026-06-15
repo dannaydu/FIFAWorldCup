@@ -1,4 +1,17 @@
 {
-  "generated_at": "2026-06-11T03:48:10Z",
-  "markets": {}
+  "generated_at": "2026-06-15T04:22:51Z",
+  "markets": {
+    "m:KXWCGAME-26JUN14SWETUN": "A",
+    "m:KXWCGAME-26JUN14AUSTUR": "A",
+    "m:KXWCGAME-26JUN12CANBIH": "D",
+    "m:KXWCGAME-26JUN11KORCZE": "A",
+    "m:KXWCGAME-26JUN14CIVECU": "A",
+    "m:KXWCGAME-26JUN14GERCUW": "A",
+    "m:KXWCGAME-26JUN14NEDJPN": "D",
+    "m:KXWCGAME-26JUN13HTISCO": "B",
+    "m:KXWCGAME-26JUN13QATSUI": "D",
+    "m:KXWCGAME-26JUN13BRAMAR": "D",
+    "m:KXWCGAME-26JUN12USAPAR": "A",
+    "m:KXWCGAME-26JUN11MEXRSA": "A"
+  }
 }

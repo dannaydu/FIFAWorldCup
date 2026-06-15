@@ -14,9 +14,10 @@
       <p class="sub">Probabilistic forecasts vs live Kalshi/Polymarket prices · paper-trading only</p>
       <nav id="tabs">
         <button data-tab="play" class="play-tab">🔮 Play</button>
-        <button data-tab="tournament" class="active">Tournament</button>
-        <button data-tab="edges">Edge board</button>
-        <button data-tab="paper">Paper trading</button>
+        <button data-tab="tournament" class="active">📊 Forecast</button>
+        <button data-tab="results">✅ Results</button>
+        <button data-tab="edges">💸 Market edges</button>
+        <button data-tab="paper">🤖 Model bets</button>
       </nav>
     </div>
   </header>
@@ -25,6 +26,7 @@
     <div id="status" class="status">Loading…</div>
     <section id="play" class="tab hidden"></section>
     <section id="tournament" class="tab"></section>
+    <section id="results" class="tab hidden"></section>
     <section id="edges" class="tab hidden"></section>
     <section id="paper" class="tab hidden"></section>
   </main>
@@ -35,6 +37,7 @@
   </footer>
 
   <script src="firebase-config.js"></script>
+  <script src="auth.js"></script>
   <script src="fantasy.js"></script>
   <script type="module" src="app.js"></script>
 </body>

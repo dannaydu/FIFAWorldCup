@@ -1,12 +1,19 @@
 {
-  "generated_at": "2026-06-11T03:48:10Z",
+  "generated_at": "2026-06-15T04:22:51Z",
   "n_matches": 2,
   "n_sims": 20000,
   "lambda": 0.5,
   "gbm_backend": "sklearn-hist",
-  "n_live_contracts": 1225,
-  "n_opportunities": 13,
+  "n_live_contracts": 1205,
+  "n_opportunities": 68,
   "n_fixtures": 72,
-  "n_results": 0,
+  "n_results": 12,
+  "scorecard": {
+    "n": 12,
+    "accuracy": 0.4167,
+    "avg_brier": 0.6687,
+    "avg_logloss": 1.0727,
+    "random_logloss": 1.0986
+  },
   "note": "Probabilistic model output. Paper-trading only, pre-cost edges."
 }

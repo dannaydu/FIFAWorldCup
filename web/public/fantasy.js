@@ -36,7 +36,10 @@ window.FANTASY = (() => {
   // ---- state -------------------------------------------------------------
   function fresh() { return { bankroll: START, picks: {}, created: Date.now() }; }
   function load() { try { return JSON.parse(localStorage.getItem(KEY)) || fresh(); } catch { return fresh(); } }
-  function save() { localStorage.setItem(KEY, JSON.stringify(state)); }
+  function save() {
+    localStorage.setItem(KEY, JSON.stringify(state));
+    if (window.AUTH && window.AUTH.available && window.AUTH.currentUser()) window.AUTH.saveCard(state.picks);
+  }
 
   const oddsOf = (p) => Math.min(MAX_ODDS, +(1 / Math.max(p, MIN_PROB)).toFixed(2));
   const picks = () => Object.values(state.picks);
@@ -214,13 +217,21 @@ window.FANTASY = (() => {
       <p class="f-note">Picks settle as results come in during the tournament. Fade the oracle 🔮 where you think it's wrong — that's where the big payouts are.</p>`;
   }
 
+  function accountBar() {
+    if (!window.AUTH || !window.AUTH.available) return "";
+    const u = window.AUTH.currentUser();
+    return u
+      ? `<div class="f-acct">☁️ Saved to your account — ${u.displayName || u.email} · <button class="f-link" data-action="signout">sign out</button></div>`
+      : `<div class="f-acct"><button class="f-btn sm" data-action="signin">Sign in to save your card across devices</button></div>`;
+  }
+
   function render() {
     const host = document.getElementById("play");
     if (!host) return;
     const body = sub === "card" ? viewCard() : viewMarkets(sub);
     host.innerHTML = `<div class="fantasy">
       <div class="f-hero"><h2>🔮 Beat the Oracle</h2><p>Build your prediction card with 🪙1,000. Take the model's odds — or fade it.</p></div>
-      ${dashboard()}${subnav()}<div class="f-body">${body}</div>
+      ${accountBar()}${dashboard()}${subnav()}<div class="f-body">${body}</div>
     </div>`;
   }
 
@@ -253,6 +264,8 @@ window.FANTASY = (() => {
     if (a === "cancel") { sel = null; return render(); }
     if (a === "reset") { if (confirm("Reset your card and bankroll?")) { state = fresh(); sel = null; save(); render(); } return; }
     if (a === "share") return share();
+    if (a === "signin" && window.AUTH) return window.AUTH.signIn();
+    if (a === "signout" && window.AUTH) return window.AUTH.signOut();
   }
 
   function onInput(e) {
@@ -313,6 +326,23 @@ window.FANTASY = (() => {
     const host = document.getElementById("play");
     host.addEventListener("click", onClick);
     host.addEventListener("input", onInput);
+
+    // Optional cloud sync: adopt the user's saved card on sign-in (or push local up).
+    if (window.AUTH && window.AUTH.available) {
+      window.AUTH.onChange(async (u) => {
+        if (u) {
+          const cloud = await window.AUTH.loadCard();
+          if (cloud && cloud.picks && Object.keys(cloud.picks).length) {
+            state.picks = cloud.picks;
+            localStorage.setItem(KEY, JSON.stringify(state));
+          } else {
+            window.AUTH.saveCard(state.picks);
+          }
+          settle();
+        }
+        render();
+      });
+    }
     render();
   }
 

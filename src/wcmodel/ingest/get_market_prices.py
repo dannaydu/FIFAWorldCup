@@ -83,6 +83,16 @@ def _to_float(x):
         return None
 
 
+def _kalshi_price(m, base):
+    """Read a Kalshi price in dollars. The API now uses `<base>_dollars` (float
+    dollars); fall back to the legacy integer-cent `<base>` field."""
+    v = _to_float(m.get(base + "_dollars"))
+    if v is not None:
+        return v
+    c = m.get(base)
+    return c / 100.0 if isinstance(c, (int, float)) else None
+
+
 # --------------------------------------------------------------------------- #
 # Polymarket
 # --------------------------------------------------------------------------- #
@@ -168,14 +178,14 @@ def _kalshi_round(ticker: str) -> str | None:
 
 
 def kalshi_series(series_ticker: str, *, market_type: str = "reach_round",
-                  limit: int = 500, timeout: float = 15.0) -> pd.DataFrame:
+                  status: str = "open", limit: int = 500, timeout: float = 15.0) -> pd.DataFrame:
     """Normalized markets for a Kalshi series (e.g. KXWCROUND, KXWCGAME)."""
     if requests is None:
         return _empty()
     rows, cursor = [], None
     try:
         while True:
-            params = {"series_ticker": series_ticker, "status": "open", "limit": 200}
+            params = {"series_ticker": series_ticker, "status": status, "limit": 200}
             if cursor:
                 params["cursor"] = cursor
             r = requests.get(f"{KALSHI_BASE}/markets", params=params, timeout=timeout)
@@ -183,14 +193,14 @@ def kalshi_series(series_ticker: str, *, market_type: str = "reach_round",
             data = r.json()
             ms = data.get("markets", [])
             for m in ms:
-                yb, ya = m.get("yes_bid"), m.get("yes_ask")
-                last = m.get("last_price")
-                # cents -> probability; prefer mid of bid/ask, fall back to last
+                yb, ya = _kalshi_price(m, "yes_bid"), _kalshi_price(m, "yes_ask")
+                last = _kalshi_price(m, "last_price")
+                # prices are in dollars (0..1); prefer mid of bid/ask, else last
                 if yb is not None and ya is not None and (yb or ya):
-                    mid = (yb + ya) / 200.0
-                    spread = abs(ya - yb) / 100.0
+                    mid = (yb + ya) / 2.0
+                    spread = abs(ya - yb)
                 elif last is not None:
-                    mid, spread = last / 100.0, None
+                    mid, spread = last, None
                 else:
                     mid, spread = None, None
                 rows.append({
@@ -202,8 +212,11 @@ def kalshi_series(series_ticker: str, *, market_type: str = "reach_round",
                     "market_type": market_type,
                     "midpoint": mid,
                     "spread": spread,
-                    "liquidity": (m.get("liquidity") or 0) / 100.0 if m.get("liquidity") else None,
-                    "volume": m.get("volume"),
+                    # Kalshi resting-book liquidity is often 0 on thin contracts;
+                    # fall back to 24h volume as the tradability proxy.
+                    "liquidity": _kalshi_price(m, "liquidity")
+                    or _to_float(m.get("volume_24h_fp")) or _to_float(m.get("volume_fp")),
+                    "volume": _to_float(m.get("volume_24h_fp")) or _to_float(m.get("volume_fp")),
                     "timestamp": _now(),
                 })
             cursor = data.get("cursor")

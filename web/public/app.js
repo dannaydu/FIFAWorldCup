@@ -2,9 +2,35 @@
 // Data source: Firestore (collection "snapshots") when firebase-config.js is
 // filled in, otherwise the bundled /data/*.json. Renders three tabs.
 
-const DOCS = ["tournament", "edges", "matches", "results", "ledger", "meta"];
+const DOCS = ["tournament", "edges", "matches", "results", "scorecard", "history", "ledger", "meta"];
 let edgeVenue = "all";   // all | polymarket | kalshi
 let EDGES = null;
+
+const intro = (t) => `<p class="tab-intro">${t}</p>`;
+const miniBar = (a, d, b) => `<span class="mini"><i style="width:${a * 100}%;background:var(--buy)"></i><i style="width:${d * 100}%;background:var(--muted)"></i><i style="width:${b * 100}%;background:var(--fade)"></i></span>`;
+
+// Minimal dependency-free SVG line chart.
+function lineChart(values, { w = 520, h = 120, color = "#38bdf8", baseline = null, ymin, ymax, pctY = false } = {}) {
+  const n = values.length;
+  if (!n) return "";
+  const pad = { l: 40, r: 12, t: 12, b: 16 };
+  const iw = w - pad.l - pad.r, ih = h - pad.t - pad.b;
+  const refs = baseline != null ? [baseline] : [];
+  let lo = ymin != null ? ymin : Math.min(...values, ...refs);
+  let hi = ymax != null ? ymax : Math.max(...values, ...refs);
+  if (lo === hi) { lo -= 0.05; hi += 0.05; }
+  const x = (i) => pad.l + (n === 1 ? iw / 2 : (i / (n - 1)) * iw);
+  const y = (v) => pad.t + ih - ((v - lo) / (hi - lo)) * ih;
+  const pts = values.map((v, i) => `${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(" ");
+  const dots = values.map((v, i) => `<circle cx="${x(i).toFixed(1)}" cy="${y(v).toFixed(1)}" r="2.6" fill="${color}"><title>${pctY ? (v * 100).toFixed(1) + "%" : v.toFixed(3)}</title></circle>`).join("");
+  const base = baseline != null
+    ? `<line x1="${pad.l}" y1="${y(baseline).toFixed(1)}" x2="${w - pad.r}" y2="${y(baseline).toFixed(1)}" stroke="#fb7185" stroke-dasharray="4 4" stroke-width="1"/>`
+    : "";
+  const yl = (v) => (pctY ? (v * 100).toFixed(0) + "%" : v.toFixed(2));
+  const axis = `<text x="4" y="${pad.t + 9}" fill="#8aa0b8" font-size="10">${yl(hi)}</text>
+    <text x="4" y="${pad.t + ih}" fill="#8aa0b8" font-size="10">${yl(lo)}</text>`;
+  return `<svg viewBox="0 0 ${w} ${h}" class="chart">${base}<polyline points="${pts}" fill="none" stroke="${color}" stroke-width="2"/>${dots}${axis}</svg>`;
+}
 const pct = (x) => (x == null ? "—" : (x * 100).toFixed(1) + "%");
 const signed = (x) => (x == null ? "—" : (x >= 0 ? "+" : "") + (x * 100).toFixed(1) + "%");
 const money = (x) => (x == null ? "—" : "$" + Number(x).toLocaleString());
@@ -52,8 +78,57 @@ function renderTournament(d) {
       <td>${pct(t.p_champion)} <span class="bar" style="width:${(t.p_champion / max) * 70}px"></span></td>
     </tr>`).join("");
   host.innerHTML = `<h2>Championship & advancement probabilities</h2>
+    ${intro("The model's forecast for the whole tournament — from 50,000 simulated runs of the real 2026 draw. Sorted by chance of winning it all.")}
     <table><thead><tr><th>Team</th><th>Grp</th><th>Win group</th><th>Reach QF</th>
     <th>Reach SF</th><th>Reach final</th><th>Champion</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+function renderScorecard(d, history) {
+  const host = document.getElementById("results");
+  const s = (d && d.summary) || {};
+  const games = (d && d.games) || [];
+  if (!games.length) {
+    host.innerHTML = `<h2>Results — how the model is doing</h2>` +
+      intro("Once group games are played, this scores the model's pre-match predictions against what actually happened.") +
+      `<div class="empty">No games scored yet.</div>`;
+    return;
+  }
+  const beatRandom = s.avg_logloss != null && s.avg_logloss < s.random_logloss;
+  const cards = [
+    ["Games scored", s.n],
+    ["Correct picks", `${Math.round(s.accuracy * s.n)} / ${s.n} (${pct(s.accuracy)})`],
+    ["Avg Brier", s.avg_brier],
+    ["Avg log-loss", `${s.avg_logloss} ${beatRandom ? "✅" : "⚠️"}`],
+    ["vs random guess", s.random_logloss],
+  ].map(([k, v]) => `<div class="card"><div class="k">${k}</div><div class="v">${v}</div></div>`).join("");
+  const rows = games.map((g) => `<tr class="${g.correct ? "row-won" : "row-lost"}">
+      <td>${g.team_a} vs ${g.team_b}</td>
+      <td>${miniBar(g.p_a, g.p_draw, g.p_b)}</td>
+      <td>${g.model_pick_label} <span class="muted">(${pct(g.model_pick_prob)})</span></td>
+      <td><b>${g.result_label}</b></td>
+      <td>${g.correct ? "✓" : "✗"}</td>
+    </tr>`).join("");
+
+  // Accuracy / log-loss over time, from the rolling history snapshots.
+  const scored = (history || []).filter((e) => e.scorecard && e.scorecard.n > 0);
+  let charts = "";
+  if (scored.length >= 2) {
+    const acc = scored.map((e) => e.scorecard.accuracy);
+    const ll = scored.map((e) => e.scorecard.avg_logloss);
+    const rnd = scored[scored.length - 1].scorecard.random_logloss;
+    charts = `<div class="chart-row">
+      <div class="chart-box"><div class="chart-title">Accuracy over time</div>${lineChart(acc, { color: "#34d399", ymin: 0, ymax: 1, pctY: true })}</div>
+      <div class="chart-box"><div class="chart-title">Log-loss vs random (dashed = ${rnd})</div>${lineChart(ll, { color: "#38bdf8", baseline: rnd })}</div>
+    </div>`;
+  } else if (scored.length === 1) {
+    charts = intro("📈 The accuracy-over-time chart fills in after a few refreshes (the cron runs every 3h).");
+  }
+
+  host.innerHTML = `<h2>Results — how the model is doing</h2>
+    ${intro(`Scoring the model's <b>pre-match</b> predictions (locked before kickoff) against actual results. Lower log-loss is better; below ${s.random_logloss} means it's beating a random guess.`)}
+    <div class="cards">${cards}</div>
+    ${charts}
+    <table><thead><tr><th>Game</th><th>Model (win/draw/win)</th><th>Model pick</th><th>Actual</th><th></th></tr></thead><tbody>${rows}</tbody></table>`;
 }
 
 const VENUE = { polymarket: "🟣 Polymarket", kalshi: "🔵 Kalshi" };
@@ -68,7 +143,8 @@ function renderEdges(d) {
     .map(([v, l]) => `<button class="venue-pill ${edgeVenue === v ? "active" : ""}" data-venue="${v}">${l}</button>`).join("");
 
   const ops = all.filter((o) => edgeVenue === "all" || o.platform === edgeVenue);
-  const header = `<h2>Live edge board <span style="color:var(--muted);font-weight:400">(λ=${(EDGES && EDGES.lambda) ?? "—"} shrinkage)</span></h2>
+  const header = `<h2>Market edges — where the model disagrees with the betting market</h2>
+    ${intro("Contracts where the model's probability differs from the live Kalshi/Polymarket price by enough to matter (after fees/spread). <b>BUY</b> = model thinks it's underpriced; <b>FADE</b> = overpriced. Research only, not betting advice.")}
     <div class="venue-filter">${pills}</div>`;
 
   if (!ops.length) {
@@ -124,7 +200,9 @@ function renderPaper(d) {
       <td>${money(b.stake)}</td>
       <td>${b.status}${b.pnl != null ? " (" + money(b.pnl) + ")" : ""}</td>
     </tr>`).join("");
-  host.innerHTML = `<h2>Paper-trading ledger</h2><div class="cards">${cards}</div>
+  host.innerHTML = `<h2>Model bets — automated paper-trading ledger</h2>
+    ${intro("The model bets its own (fake) bankroll on the edges above, sized by fractional-Kelly. <b>CLV</b> (closing-line value) tracks whether the price moved the model's way — the cleanest sign it's finding real value. No real money.")}
+    <div class="cards">${cards}</div>
     ${bets.length ? `<table><thead><tr><th>Contract</th><th>Side</th><th>Entry</th>
     <th>Last</th><th>CLV</th><th>Stake</th><th>Status</th></tr></thead><tbody>${rows}</tbody></table>`
     : `<div class="empty">No positions logged yet.</div>`}`;
@@ -134,7 +212,7 @@ function setupTabs() {
   const btns = document.querySelectorAll("#tabs button");
   btns.forEach((b) => b.addEventListener("click", () => {
     btns.forEach((x) => x.classList.toggle("active", x === b));
-    ["play", "tournament", "edges", "paper"].forEach((id) =>
+    ["play", "tournament", "results", "edges", "paper"].forEach((id) =>
       document.getElementById(id).classList.toggle("hidden", id !== b.dataset.tab));
   }));
 }
@@ -151,6 +229,7 @@ async function main() {
     data = await loadFromJson();
   }
   renderTournament(data.tournament);
+  renderScorecard(data.scorecard, data.history);
   renderEdges(data.edges);
   renderPaper(data.ledger);
   if (window.FANTASY) window.FANTASY.init(data);

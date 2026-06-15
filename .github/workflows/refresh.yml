@@ -1,0 +1,59 @@
+name: Refresh forecasts
+
+# Re-runs the model on live data and redeploys the site through the tournament.
+# Setup required (one-time):
+#   1. Repo Settings -> Secrets and variables -> Actions -> New secret:
+#        FIREBASE_SERVICE_ACCOUNT  = contents of a Firebase service-account JSON
+#        (Firebase console -> Project settings -> Service accounts -> Generate key)
+#   2. That's it — match results + squad data download with no keys.
+
+on:
+  schedule:
+    - cron: "0 */3 * * *"     # every 3 hours (UTC). Adjust as you like.
+  workflow_dispatch: {}        # also run on-demand from the Actions tab
+
+permissions:
+  contents: write              # to commit refreshed snapshots back
+
+concurrency:
+  group: refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    env:
+      HAS_FIREBASE: ${{ secrets.FIREBASE_SERVICE_ACCOUNT != '' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Fetch squad data (Transfermarkt via Kaggle, no auth)
+        run: python scripts/fetch_squads.py
+
+      - name: Rebuild snapshots (train + simulate + live markets + scorecard)
+        run: python scripts/export_web.py
+
+      - name: Commit refreshed data
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add web/public/data data/locked_predictions.json
+          git commit -m "chore: refresh forecasts [skip ci]" || echo "no changes to commit"
+          git push || echo "nothing to push"
+
+      - name: Deploy to Firebase Hosting
+        if: env.HAS_FIREBASE == 'true'
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          projectId: fifa-3b360
+          channelId: live

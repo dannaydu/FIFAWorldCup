@@ -79,9 +79,30 @@ def normalize(df: pd.DataFrame) -> pd.DataFrame:
     return df[keep].sort_values("date", kind="stable").reset_index(drop=True)
 
 
+# Public, no-auth mirror of the international results dataset.
+RESULTS_URL = "https://raw.githubusercontent.com/martj42/international_results/master/results.csv"
+
+
+def _try_download_results(path) -> bool:
+    """Best-effort fetch of results.csv from the public mirror (no key)."""
+    import urllib.request
+
+    try:
+        req = urllib.request.Request(RESULTS_URL, headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req, timeout=60) as resp:
+            data = resp.read()
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(data)
+        return True
+    except Exception:
+        return False
+
+
 def load_matches(path=None) -> pd.DataFrame:
-    """Load canonical matches; fall back to synthetic demo data if absent."""
+    """Load canonical matches; auto-download from the mirror, else synthesise."""
     path = path or (config.RAW / "results.csv")
+    if not path.exists():
+        _try_download_results(path)
     if not path.exists():
         from wcmodel.ingest.synthetic import generate_matches
 

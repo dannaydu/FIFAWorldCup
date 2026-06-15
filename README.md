@@ -213,10 +213,23 @@ UI reads. Tabs:
   Picks **auto-settle** as results land — the exporter writes a `results` snapshot
   (match outcomes parsed from settled Kalshi tickers, group/champion winners from
   Polymarket resolutions) and the game books each player's bankroll on next load.
-* **Tournament**: championship + advancement probabilities.
-* **Edge board**: live model-vs-market edges, **filterable by venue**
+* **📊 Forecast**: championship + advancement probabilities.
+* **✅ Results**: scores the model's **pre-match** predictions (locked before
+  kickoff) against actual results — accuracy, Brier, log-loss vs a random guess.
+* **💸 Market edges**: live model-vs-market edges, **filterable by venue**
   (Polymarket / Kalshi) with per-row platform badges.
-* **Paper trading**: the model's own ledger with CLV.
+* **🤖 Model bets**: the model's own paper-trading ledger with CLV.
+
+Optional **accounts**: fill in `firebase-config.js` and enable Authentication
+(Google) + Firestore, and players can sign in to sync their fantasy card across
+devices (rules already scope each user to their own doc). Without it, the game
+runs fine on per-browser localStorage.
+
+**Auto-refresh (cron):** `.github/workflows/refresh.yml` re-runs the model on live
+data and redeploys every 3 hours during the tournament. One-time setup: add a
+`FIREBASE_SERVICE_ACCOUNT` repo secret (Firebase console → Project settings →
+Service accounts → Generate key). Match results + squad data download with no
+keys; the workflow commits refreshed snapshots (incl. locked predictions) back.
 
 ```bash
 python scripts/export_web.py             # write web/public/data/*.json

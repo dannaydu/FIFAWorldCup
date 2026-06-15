@@ -1,0 +1,578 @@
+{
+  "KXWCGAME-26JUN15BELEGY": {
+    "team_a": "Belgium",
+    "team_b": "Egypt",
+    "p_a": 0.5853,
+    "p_draw": 0.2346,
+    "p_b": 0.1801,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN15IRINZL": {
+    "team_a": "Iran",
+    "team_b": "New Zealand",
+    "p_a": 0.6305,
+    "p_draw": 0.2049,
+    "p_b": 0.1646,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN15KSAURU": {
+    "team_a": "Saudi Arabia",
+    "team_b": "Uruguay",
+    "p_a": 0.1102,
+    "p_draw": 0.2218,
+    "p_b": 0.6681,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN15ESPCPV": {
+    "team_a": "Spain",
+    "team_b": "Cape Verde",
+    "p_a": 0.8901,
+    "p_draw": 0.0812,
+    "p_b": 0.0287,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN16ARGDZA": {
+    "team_a": "Argentina",
+    "team_b": "Algeria",
+    "p_a": 0.7201,
+    "p_draw": 0.1585,
+    "p_b": 0.1214,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN16FRASEN": {
+    "team_a": "France",
+    "team_b": "Senegal",
+    "p_a": 0.538,
+    "p_draw": 0.277,
+    "p_b": 0.185,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN16IRQNOR": {
+    "team_a": "Iraq",
+    "team_b": "Norway",
+    "p_a": 0.1267,
+    "p_draw": 0.207,
+    "p_b": 0.6663,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN17AUTJOR": {
+    "team_a": "Austria",
+    "team_b": "Jordan",
+    "p_a": 0.5953,
+    "p_draw": 0.2297,
+    "p_b": 0.1749,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN17ENGCRO": {
+    "team_a": "England",
+    "team_b": "Croatia",
+    "p_a": 0.491,
+    "p_draw": 0.3183,
+    "p_b": 0.1907,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN17GHAPAN": {
+    "team_a": "Ghana",
+    "team_b": "Panama",
+    "p_a": 0.2129,
+    "p_draw": 0.3004,
+    "p_b": 0.4868,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN17PORCOD": {
+    "team_a": "Portugal",
+    "team_b": "DR Congo",
+    "p_a": 0.588,
+    "p_draw": 0.3077,
+    "p_b": 0.1043,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN17UZBCOL": {
+    "team_a": "Uzbekistan",
+    "team_b": "Colombia",
+    "p_a": 0.1207,
+    "p_draw": 0.2242,
+    "p_b": 0.6551,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN18CANQAT": {
+    "team_a": "Canada",
+    "team_b": "Qatar",
+    "p_a": 0.8158,
+    "p_draw": 0.1358,
+    "p_b": 0.0485,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN18CZERSA": {
+    "team_a": "Czech Republic",
+    "team_b": "South Africa",
+    "p_a": 0.5482,
+    "p_draw": 0.2373,
+    "p_b": 0.2145,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN18MEXKOR": {
+    "team_a": "Mexico",
+    "team_b": "South Korea",
+    "p_a": 0.6259,
+    "p_draw": 0.2308,
+    "p_b": 0.1434,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN18SUIBIH": {
+    "team_a": "Switzerland",
+    "team_b": "Bosnia and Herzegovina",
+    "p_a": 0.7586,
+    "p_draw": 0.1513,
+    "p_b": 0.0901,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN19BRAHTI": {
+    "team_a": "Brazil",
+    "team_b": "Haiti",
+    "p_a": 0.7937,
+    "p_draw": 0.1347,
+    "p_b": 0.0716,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN19SCOMAR": {
+    "team_a": "Scotland",
+    "team_b": "Morocco",
+    "p_a": 0.1858,
+    "p_draw": 0.2533,
+    "p_b": 0.5609,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN19TURPAR": {
+    "team_a": "Turkey",
+    "team_b": "Paraguay",
+    "p_a": 0.4707,
+    "p_draw": 0.2621,
+    "p_b": 0.2672,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN19USAAUS": {
+    "team_a": "United States",
+    "team_b": "Australia",
+    "p_a": 0.4164,
+    "p_draw": 0.2928,
+    "p_b": 0.2909,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN20ECUCUW": {
+    "team_a": "Ecuador",
+    "team_b": "Cura\u00e7ao",
+    "p_a": 0.8228,
+    "p_draw": 0.1204,
+    "p_b": 0.0568,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN20GERCIV": {
+    "team_a": "Germany",
+    "team_b": "Ivory Coast",
+    "p_a": 0.6043,
+    "p_draw": 0.2115,
+    "p_b": 0.1842,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN20NEDSWE": {
+    "team_a": "Netherlands",
+    "team_b": "Sweden",
+    "p_a": 0.6327,
+    "p_draw": 0.1901,
+    "p_b": 0.1772,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN21BELIRI": {
+    "team_a": "Belgium",
+    "team_b": "Iran",
+    "p_a": 0.5972,
+    "p_draw": 0.1646,
+    "p_b": 0.2382,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN21NZLEGY": {
+    "team_a": "New Zealand",
+    "team_b": "Egypt",
+    "p_a": 0.1987,
+    "p_draw": 0.2492,
+    "p_b": 0.5521,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN21ESPKSA": {
+    "team_a": "Spain",
+    "team_b": "Saudi Arabia",
+    "p_a": 0.8714,
+    "p_draw": 0.0839,
+    "p_b": 0.0447,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN21TUNJPN": {
+    "team_a": "Tunisia",
+    "team_b": "Japan",
+    "p_a": 0.1257,
+    "p_draw": 0.2577,
+    "p_b": 0.6166,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN21URUCPV": {
+    "team_a": "Uruguay",
+    "team_b": "Cape Verde",
+    "p_a": 0.7325,
+    "p_draw": 0.1747,
+    "p_b": 0.0928,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN22ARGAUT": {
+    "team_a": "Argentina",
+    "team_b": "Austria",
+    "p_a": 0.7223,
+    "p_draw": 0.1756,
+    "p_b": 0.1021,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN22FRAIRQ": {
+    "team_a": "France",
+    "team_b": "Iraq",
+    "p_a": 0.7625,
+    "p_draw": 0.1661,
+    "p_b": 0.0714,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN22JORDZA": {
+    "team_a": "Jordan",
+    "team_b": "Algeria",
+    "p_a": 0.1704,
+    "p_draw": 0.2857,
+    "p_b": 0.5439,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN22NORSEN": {
+    "team_a": "Norway",
+    "team_b": "Senegal",
+    "p_a": 0.5122,
+    "p_draw": 0.2103,
+    "p_b": 0.2776,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN23COLCOD": {
+    "team_a": "Colombia",
+    "team_b": "DR Congo",
+    "p_a": 0.7399,
+    "p_draw": 0.1602,
+    "p_b": 0.0999,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN23ENGGHA": {
+    "team_a": "England",
+    "team_b": "Ghana",
+    "p_a": 0.8063,
+    "p_draw": 0.1495,
+    "p_b": 0.0442,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN23PANCRO": {
+    "team_a": "Panama",
+    "team_b": "Croatia",
+    "p_a": 0.1704,
+    "p_draw": 0.2813,
+    "p_b": 0.5482,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN23PORUZB": {
+    "team_a": "Portugal",
+    "team_b": "Uzbekistan",
+    "p_a": 0.6402,
+    "p_draw": 0.2073,
+    "p_b": 0.1525,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN24BIHQAT": {
+    "team_a": "Bosnia and Herzegovina",
+    "team_b": "Qatar",
+    "p_a": 0.5479,
+    "p_draw": 0.2622,
+    "p_b": 0.1899,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN24CZEMEX": {
+    "team_a": "Czech Republic",
+    "team_b": "Mexico",
+    "p_a": 0.2232,
+    "p_draw": 0.2657,
+    "p_b": 0.5111,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN24MARHTI": {
+    "team_a": "Morocco",
+    "team_b": "Haiti",
+    "p_a": 0.7641,
+    "p_draw": 0.1512,
+    "p_b": 0.0846,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN24SCOBRA": {
+    "team_a": "Scotland",
+    "team_b": "Brazil",
+    "p_a": 0.1321,
+    "p_draw": 0.2424,
+    "p_b": 0.6255,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN24RSAKOR": {
+    "team_a": "South Africa",
+    "team_b": "South Korea",
+    "p_a": 0.1854,
+    "p_draw": 0.2766,
+    "p_b": 0.538,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN24SUICAN": {
+    "team_a": "Switzerland",
+    "team_b": "Canada",
+    "p_a": 0.5796,
+    "p_draw": 0.2194,
+    "p_b": 0.201,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN25CUWCIV": {
+    "team_a": "Cura\u00e7ao",
+    "team_b": "Ivory Coast",
+    "p_a": 0.1217,
+    "p_draw": 0.2633,
+    "p_b": 0.615,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN25ECUGER": {
+    "team_a": "Ecuador",
+    "team_b": "Germany",
+    "p_a": 0.2442,
+    "p_draw": 0.3888,
+    "p_b": 0.367,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN25JPNSWE": {
+    "team_a": "Japan",
+    "team_b": "Sweden",
+    "p_a": 0.6161,
+    "p_draw": 0.2007,
+    "p_b": 0.1832,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN25PARAUS": {
+    "team_a": "Paraguay",
+    "team_b": "Australia",
+    "p_a": 0.4751,
+    "p_draw": 0.2407,
+    "p_b": 0.2842,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN25TUNNED": {
+    "team_a": "Tunisia",
+    "team_b": "Netherlands",
+    "p_a": 0.1108,
+    "p_draw": 0.1498,
+    "p_b": 0.7394,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN25TURUSA": {
+    "team_a": "Turkey",
+    "team_b": "United States",
+    "p_a": 0.5399,
+    "p_draw": 0.2361,
+    "p_b": 0.2239,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN26CPVKSA": {
+    "team_a": "Cape Verde",
+    "team_b": "Saudi Arabia",
+    "p_a": 0.3873,
+    "p_draw": 0.3021,
+    "p_b": 0.3106,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN26EGYIRI": {
+    "team_a": "Egypt",
+    "team_b": "Iran",
+    "p_a": 0.3415,
+    "p_draw": 0.3235,
+    "p_b": 0.335,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN26NZLBEL": {
+    "team_a": "New Zealand",
+    "team_b": "Belgium",
+    "p_a": 0.1233,
+    "p_draw": 0.1938,
+    "p_b": 0.6829,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN26NORFRA": {
+    "team_a": "Norway",
+    "team_b": "France",
+    "p_a": 0.2088,
+    "p_draw": 0.2726,
+    "p_b": 0.5185,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN26SENIRQ": {
+    "team_a": "Senegal",
+    "team_b": "Iraq",
+    "p_a": 0.6107,
+    "p_draw": 0.229,
+    "p_b": 0.1603,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN26URUESP": {
+    "team_a": "Uruguay",
+    "team_b": "Spain",
+    "p_a": 0.1185,
+    "p_draw": 0.2333,
+    "p_b": 0.6482,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN27DZAAUT": {
+    "team_a": "Algeria",
+    "team_b": "Austria",
+    "p_a": 0.3528,
+    "p_draw": 0.3298,
+    "p_b": 0.3174,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN27COLPOR": {
+    "team_a": "Colombia",
+    "team_b": "Portugal",
+    "p_a": 0.2628,
+    "p_draw": 0.3342,
+    "p_b": 0.403,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN27CROGHA": {
+    "team_a": "Croatia",
+    "team_b": "Ghana",
+    "p_a": 0.6892,
+    "p_draw": 0.2143,
+    "p_b": 0.0965,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN27CODUZB": {
+    "team_a": "DR Congo",
+    "team_b": "Uzbekistan",
+    "p_a": 0.3374,
+    "p_draw": 0.3037,
+    "p_b": 0.3589,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN27JORARG": {
+    "team_a": "Jordan",
+    "team_b": "Argentina",
+    "p_a": 0.0584,
+    "p_draw": 0.1176,
+    "p_b": 0.8239,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN27PANENG": {
+    "team_a": "Panama",
+    "team_b": "England",
+    "p_a": 0.102,
+    "p_draw": 0.2111,
+    "p_b": 0.6869,
+    "locked_at": "2026-06-15T04:21:03Z"
+  },
+  "KXWCGAME-26JUN11MEXRSA": {
+    "team_a": "Mexico",
+    "team_b": "South Africa",
+    "p_a": 0.8334,
+    "p_draw": 0.1179,
+    "p_b": 0.0487,
+    "locked_at": "2026-06-15T04:22:51Z"
+  },
+  "KXWCGAME-26JUN11KORCZE": {
+    "team_a": "South Korea",
+    "team_b": "Czech Republic",
+    "p_a": 0.3406,
+    "p_draw": 0.3018,
+    "p_b": 0.3576,
+    "locked_at": "2026-06-15T04:22:51Z"
+  },
+  "KXWCGAME-26JUN12CANBIH": {
+    "team_a": "Canada",
+    "team_b": "Bosnia and Herzegovina",
+    "p_a": 0.7196,
+    "p_draw": 0.1755,
+    "p_b": 0.105,
+    "locked_at": "2026-06-15T04:22:51Z"
+  },
+  "KXWCGAME-26JUN12USAPAR": {
+    "team_a": "United States",
+    "team_b": "Paraguay",
+    "p_a": 0.4379,
+    "p_draw": 0.3284,
+    "p_b": 0.2336,
+    "locked_at": "2026-06-15T04:22:51Z"
+  },
+  "KXWCGAME-26JUN13BRAMAR": {
+    "team_a": "Brazil",
+    "team_b": "Morocco",
+    "p_a": 0.5156,
+    "p_draw": 0.2587,
+    "p_b": 0.2256,
+    "locked_at": "2026-06-15T04:22:51Z"
+  },
+  "KXWCGAME-26JUN13HTISCO": {
+    "team_a": "Haiti",
+    "team_b": "Scotland",
+    "p_a": 0.1998,
+    "p_draw": 0.2892,
+    "p_b": 0.511,
+    "locked_at": "2026-06-15T04:22:51Z"
+  },
+  "KXWCGAME-26JUN13QATSUI": {
+    "team_a": "Qatar",
+    "team_b": "Switzerland",
+    "p_a": 0.0717,
+    "p_draw": 0.2037,
+    "p_b": 0.7246,
+    "locked_at": "2026-06-15T04:22:51Z"
+  },
+  "KXWCGAME-26JUN14AUSTUR": {
+    "team_a": "Australia",
+    "team_b": "Turkey",
+    "p_a": 0.2561,
+    "p_draw": 0.3056,
+    "p_b": 0.4383,
+    "locked_at": "2026-06-15T04:22:51Z"
+  },
+  "KXWCGAME-26JUN14GERCUW": {
+    "team_a": "Germany",
+    "team_b": "Cura\u00e7ao",
+    "p_a": 0.842,
+    "p_draw": 0.1109,
+    "p_b": 0.0471,
+    "locked_at": "2026-06-15T04:22:51Z"
+  },
+  "KXWCGAME-26JUN14CIVECU": {
+    "team_a": "Ivory Coast",
+    "team_b": "Ecuador",
+    "p_a": 0.2334,
+    "p_draw": 0.2974,
+    "p_b": 0.4692,
+    "locked_at": "2026-06-15T04:22:51Z"
+  },
+  "KXWCGAME-26JUN14NEDJPN": {
+    "team_a": "Netherlands",
+    "team_b": "Japan",
+    "p_a": 0.5455,
+    "p_draw": 0.1927,
+    "p_b": 0.2618,
+    "locked_at": "2026-06-15T04:22:51Z"
+  },
+  "KXWCGAME-26JUN14SWETUN": {
+    "team_a": "Sweden",
+    "team_b": "Tunisia",
+    "p_a": 0.4506,
+    "p_draw": 0.2513,
+    "p_b": 0.298,
+    "locked_at": "2026-06-15T04:22:51Z"
+  }
+}
