@@ -41,12 +41,16 @@ jobs:
       - name: Rebuild snapshots (train + simulate + live markets + scorecard)
         run: python scripts/export_web.py
 
-      - name: Commit refreshed data
+      - name: Persist model state (NOT the per-run display data)
+        # The live site is served from the Firebase deploy below, so the
+        # web/public/data/*.json snapshots don't need committing — only the
+        # state that must carry over between runs (locked predictions + ledger).
+        # This avoids constant data-file conflicts with local development.
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add web/public/data data/locked_predictions.json data/paper_ledger.json
-          git commit -m "chore: refresh forecasts [skip ci]" || echo "no changes to commit"
+          git add data/locked_predictions.json data/paper_ledger.json
+          git commit -m "chore: persist model state [skip ci]" || echo "no changes to commit"
           git push || echo "nothing to push"
 
       - name: Deploy to Firebase Hosting

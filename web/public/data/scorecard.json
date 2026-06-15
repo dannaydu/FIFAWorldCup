@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-15T06:40:51Z",
+  "generated_at": "2026-06-15T23:18:50Z",
   "games": [
     {
       "team_a": "Australia",
@@ -15,6 +15,21 @@
       "correct": false,
       "brier": 0.8389,
       "logloss": 1.3622
+    },
+    {
+      "team_a": "Belgium",
+      "team_b": "Egypt",
+      "p_a": 0.5853,
+      "p_draw": 0.2346,
+      "p_b": 0.1801,
+      "result": "D",
+      "result_label": "Draw",
+      "model_pick": "A",
+      "model_pick_label": "Belgium",
+      "model_pick_prob": 0.5853,
+      "correct": false,
+      "brier": 0.9608,
+      "logloss": 1.4499
     },
     {
       "team_a": "Brazil",
@@ -152,6 +167,21 @@
       "logloss": 1.077
     },
     {
+      "team_a": "Spain",
+      "team_b": "Cape Verde",
+      "p_a": 0.8901,
+      "p_draw": 0.0812,
+      "p_b": 0.0287,
+      "result": "D",
+      "result_label": "Draw",
+      "model_pick": "A",
+      "model_pick_label": "Spain",
+      "model_pick_prob": 0.8901,
+      "correct": false,
+      "brier": 1.6373,
+      "logloss": 2.5108
+    },
+    {
       "team_a": "Sweden",
       "team_b": "Tunisia",
       "p_a": 0.4506,
@@ -183,16 +213,16 @@
     }
   ],
   "summary": {
-    "n": 12,
-    "accuracy": 0.4167,
-    "expected_accuracy": 0.5704,
-    "expected_correct": 6.85,
-    "accuracy_delta": -0.1538,
-    "avg_brier": 0.6687,
-    "avg_logloss": 1.0727,
+    "n": 14,
+    "accuracy": 0.3571,
+    "expected_accuracy": 0.5943,
+    "expected_correct": 8.32,
+    "accuracy_delta": -0.2372,
+    "avg_brier": 0.7588,
+    "avg_logloss": 1.2024,
     "random_logloss": 1.0986,
-    "logloss_skill": 0.0236,
-    "actual_draws": 4,
-    "expected_draws": 2.83
+    "logloss_skill": -0.0945,
+    "actual_draws": 6,
+    "expected_draws": 3.15
   }
 }
