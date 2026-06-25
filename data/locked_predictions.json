@@ -574,5 +574,13 @@
     "p_draw": 0.2513,
     "p_b": 0.298,
     "locked_at": "2026-06-15T04:22:51Z"
+  },
+  "KXWCGAME-26JUN28RSACAN": {
+    "team_a": "South Africa",
+    "team_b": "Canada",
+    "p_a": 0.1055,
+    "p_draw": 0.2369,
+    "p_b": 0.6576,
+    "locked_at": "2026-06-25T03:52:45Z"
   }
 }
