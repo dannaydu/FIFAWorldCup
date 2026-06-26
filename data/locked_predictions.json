@@ -582,5 +582,29 @@
     "p_draw": 0.2369,
     "p_b": 0.6576,
     "locked_at": "2026-06-25T03:52:45Z"
+  },
+  "KXWCGAME-26JUN29BRAJPN": {
+    "team_a": "Brazil",
+    "team_b": "Japan",
+    "p_a": 0.5909,
+    "p_draw": 0.2402,
+    "p_b": 0.1689,
+    "locked_at": "2026-06-26T14:30:54Z"
+  },
+  "KXWCGAME-26JUN29NEDMAR": {
+    "team_a": "Netherlands",
+    "team_b": "Morocco",
+    "p_a": 0.4291,
+    "p_draw": 0.2542,
+    "p_b": 0.3167,
+    "locked_at": "2026-06-26T14:30:54Z"
+  },
+  "KXWCGAME-26JUL01USABIH": {
+    "team_a": "United States",
+    "team_b": "Bosnia and Herzegovina",
+    "p_a": 0.7239,
+    "p_draw": 0.1912,
+    "p_b": 0.0849,
+    "locked_at": "2026-06-26T14:30:54Z"
   }
 }
