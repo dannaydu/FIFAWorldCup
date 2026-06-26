@@ -606,5 +606,13 @@
     "p_draw": 0.1912,
     "p_b": 0.0849,
     "locked_at": "2026-06-26T14:30:54Z"
+  },
+  "KXWCGAME-26JUN30CIVNOR": {
+    "team_a": "Ivory Coast",
+    "team_b": "Norway",
+    "p_a": 0.215,
+    "p_draw": 0.2741,
+    "p_b": 0.511,
+    "locked_at": "2026-06-26T22:17:21Z"
   }
 }
