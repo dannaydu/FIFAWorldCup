@@ -614,5 +614,29 @@
     "p_draw": 0.2741,
     "p_b": 0.511,
     "locked_at": "2026-06-26T22:17:21Z"
+  },
+  "KXWCGAME-26JUN29GERPAR": {
+    "team_a": "Germany",
+    "team_b": "Paraguay",
+    "p_a": 0.602,
+    "p_draw": 0.2139,
+    "p_b": 0.1841,
+    "locked_at": "2026-06-27T03:41:54Z"
+  },
+  "KXWCGAME-26JUN30FRASWE": {
+    "team_a": "France",
+    "team_b": "Sweden",
+    "p_a": 0.6695,
+    "p_draw": 0.2399,
+    "p_b": 0.0906,
+    "locked_at": "2026-06-27T03:41:54Z"
+  },
+  "KXWCGAME-26JUL03ARGCPV": {
+    "team_a": "Argentina",
+    "team_b": "Cape Verde",
+    "p_a": 0.8305,
+    "p_draw": 0.1404,
+    "p_b": 0.0291,
+    "locked_at": "2026-06-27T03:41:54Z"
   }
 }
