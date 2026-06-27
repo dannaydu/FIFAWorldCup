@@ -638,5 +638,13 @@
     "p_draw": 0.1404,
     "p_b": 0.0291,
     "locked_at": "2026-06-27T03:41:54Z"
+  },
+  "KXWCGAME-26JUL03AUSEGY": {
+    "team_a": "Australia",
+    "team_b": "Egypt",
+    "p_a": 0.384,
+    "p_draw": 0.2403,
+    "p_b": 0.3757,
+    "locked_at": "2026-06-27T13:48:54Z"
   }
 }
