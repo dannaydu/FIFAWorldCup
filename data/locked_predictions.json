@@ -710,5 +710,13 @@
     "p_draw": 0.3316,
     "p_b": 0.3188,
     "locked_at": "2026-06-30T14:24:59Z"
+  },
+  "KXWCGAME-26JUL05BRANOR": {
+    "team_a": "Brazil",
+    "team_b": "Norway",
+    "p_a": 0.5599,
+    "p_draw": 0.2423,
+    "p_b": 0.1978,
+    "locked_at": "2026-06-30T20:02:31Z"
   }
 }
