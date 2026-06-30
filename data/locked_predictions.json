@@ -702,5 +702,13 @@
     "p_draw": 0.2524,
     "p_b": 0.2268,
     "locked_at": "2026-06-28T13:52:51Z"
+  },
+  "KXWCGAME-26JUL04CANMAR": {
+    "team_a": "Canada",
+    "team_b": "Morocco",
+    "p_a": 0.3496,
+    "p_draw": 0.3316,
+    "p_b": 0.3188,
+    "locked_at": "2026-06-30T14:24:59Z"
   }
 }
