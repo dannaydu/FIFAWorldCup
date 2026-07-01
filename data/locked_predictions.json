@@ -726,5 +726,13 @@
     "p_draw": 0.2317,
     "p_b": 0.6621,
     "locked_at": "2026-07-01T04:09:40Z"
+  },
+  "KXWCGAME-26JUL05MEXENG": {
+    "team_a": "Mexico",
+    "team_b": "England",
+    "p_a": 0.3148,
+    "p_draw": 0.2369,
+    "p_b": 0.4483,
+    "locked_at": "2026-07-01T20:00:05Z"
   }
 }
