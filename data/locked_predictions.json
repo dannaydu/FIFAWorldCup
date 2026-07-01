@@ -718,5 +718,13 @@
     "p_draw": 0.2423,
     "p_b": 0.1978,
     "locked_at": "2026-06-30T20:02:31Z"
+  },
+  "KXWCGAME-26JUL04PARFRA": {
+    "team_a": "Paraguay",
+    "team_b": "France",
+    "p_a": 0.1062,
+    "p_draw": 0.2317,
+    "p_b": 0.6621,
+    "locked_at": "2026-07-01T04:09:40Z"
   }
 }
