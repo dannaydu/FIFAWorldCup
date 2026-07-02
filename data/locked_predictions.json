@@ -734,5 +734,13 @@
     "p_draw": 0.2369,
     "p_b": 0.4483,
     "locked_at": "2026-07-01T20:00:05Z"
+  },
+  "KXWCGAME-26JUL06USABEL": {
+    "team_a": "United States",
+    "team_b": "Belgium",
+    "p_a": 0.2745,
+    "p_draw": 0.2227,
+    "p_b": 0.5028,
+    "locked_at": "2026-07-02T03:50:58Z"
   }
 }
