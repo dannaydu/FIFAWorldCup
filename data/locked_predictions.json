@@ -742,5 +742,13 @@
     "p_draw": 0.2227,
     "p_b": 0.5028,
     "locked_at": "2026-07-02T03:50:58Z"
+  },
+  "KXWCGAME-26JUL06PORESP": {
+    "team_a": "Portugal",
+    "team_b": "Spain",
+    "p_a": 0.1567,
+    "p_draw": 0.2926,
+    "p_b": 0.5507,
+    "locked_at": "2026-07-03T03:31:55Z"
   }
 }
