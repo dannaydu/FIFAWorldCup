@@ -758,5 +758,13 @@
     "p_draw": 0.2232,
     "p_b": 0.0697,
     "locked_at": "2026-07-04T03:24:30Z"
+  },
+  "KXWCGAME-26JUL07SUICOL": {
+    "team_a": "Switzerland",
+    "team_b": "Colombia",
+    "p_a": 0.3399,
+    "p_draw": 0.2783,
+    "p_b": 0.3818,
+    "locked_at": "2026-07-04T13:39:13Z"
   }
 }
