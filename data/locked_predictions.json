@@ -750,5 +750,13 @@
     "p_draw": 0.2926,
     "p_b": 0.5507,
     "locked_at": "2026-07-03T03:31:55Z"
+  },
+  "KXWCGAME-26JUL07ARGEGY": {
+    "team_a": "Argentina",
+    "team_b": "Egypt",
+    "p_a": 0.7071,
+    "p_draw": 0.2232,
+    "p_b": 0.0697,
+    "locked_at": "2026-07-04T03:24:30Z"
   }
 }
