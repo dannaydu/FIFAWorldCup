@@ -766,5 +766,13 @@
     "p_draw": 0.2783,
     "p_b": 0.3818,
     "locked_at": "2026-07-04T13:39:13Z"
+  },
+  "KXWCGAME-26JUL09FRAMAR": {
+    "team_a": "France",
+    "team_b": "Morocco",
+    "p_a": 0.6134,
+    "p_draw": 0.1951,
+    "p_b": 0.1915,
+    "locked_at": "2026-07-05T03:41:11Z"
   }
 }
