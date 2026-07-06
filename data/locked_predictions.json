@@ -774,5 +774,13 @@
     "p_draw": 0.1951,
     "p_b": 0.1915,
     "locked_at": "2026-07-05T03:41:11Z"
+  },
+  "KXWCGAME-26JUL11NORENG": {
+    "team_a": "Norway",
+    "team_b": "England",
+    "p_a": 0.18,
+    "p_draw": 0.2079,
+    "p_b": 0.6121,
+    "locked_at": "2026-07-06T15:39:18Z"
   }
 }
