@@ -782,5 +782,13 @@
     "p_draw": 0.2079,
     "p_b": 0.6121,
     "locked_at": "2026-07-06T15:39:18Z"
+  },
+  "KXWCGAME-26JUL10ESPBEL": {
+    "team_a": "Spain",
+    "team_b": "Belgium",
+    "p_a": 0.5639,
+    "p_draw": 0.2493,
+    "p_b": 0.1868,
+    "locked_at": "2026-07-07T03:39:44Z"
   }
 }
