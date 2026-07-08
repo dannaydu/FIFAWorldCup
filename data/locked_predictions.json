@@ -790,5 +790,13 @@
     "p_draw": 0.2493,
     "p_b": 0.1868,
     "locked_at": "2026-07-07T03:39:44Z"
+  },
+  "KXWCGAME-26JUL11ARGSUI": {
+    "team_a": "Argentina",
+    "team_b": "Switzerland",
+    "p_a": 0.6474,
+    "p_draw": 0.1989,
+    "p_b": 0.1537,
+    "locked_at": "2026-07-08T02:54:47Z"
   }
 }
