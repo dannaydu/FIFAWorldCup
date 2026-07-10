@@ -798,5 +798,13 @@
     "p_draw": 0.1989,
     "p_b": 0.1537,
     "locked_at": "2026-07-08T02:54:47Z"
+  },
+  "KXWCGAME-26JUL14FRAESP": {
+    "team_a": "France",
+    "team_b": "Spain",
+    "p_a": 0.4399,
+    "p_draw": 0.2869,
+    "p_b": 0.2732,
+    "locked_at": "2026-07-10T22:06:53Z"
   }
 }
