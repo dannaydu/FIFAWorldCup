@@ -806,5 +806,13 @@
     "p_draw": 0.2869,
     "p_b": 0.2732,
     "locked_at": "2026-07-10T22:06:53Z"
+  },
+  "KXWCGAME-26JUL15ENGARG": {
+    "team_a": "England",
+    "team_b": "Argentina",
+    "p_a": 0.3579,
+    "p_draw": 0.3,
+    "p_b": 0.3421,
+    "locked_at": "2026-07-12T08:22:00Z"
   }
 }
