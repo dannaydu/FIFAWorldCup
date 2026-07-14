@@ -432,7 +432,7 @@
       "shares": 588.24,
       "status": "open",
       "last_price": 0.465,
-      "last_ts": "2026-07-14T19:24:14Z",
+      "last_ts": "2026-07-14T22:01:09Z",
       "clv": 0.295,
       "closing_price": null,
       "outcome": null,
@@ -867,13 +867,13 @@
       "edge": 0.0564,
       "stake": 100.0,
       "shares": 317.46,
-      "status": "open",
+      "status": "settled",
       "last_price": 0.615,
       "last_ts": "2026-07-14T19:24:14Z",
       "clv": 0.3,
-      "closing_price": null,
-      "outcome": null,
-      "pnl": null
+      "closing_price": 0.615,
+      "outcome": 1,
+      "pnl": 217.46
     },
     {
       "bet_id": "kalshi:KXWCGAME-26JUN17PORCOD-TIE:YES",
@@ -1327,13 +1327,13 @@
       "edge": 0.043,
       "stake": 100.0,
       "shares": 141.84,
-      "status": "open",
+      "status": "settled",
       "last_price": 0.595,
       "last_ts": "2026-07-14T19:24:14Z",
       "clv": -0.11,
-      "closing_price": null,
-      "outcome": null,
-      "pnl": null
+      "closing_price": 0.595,
+      "outcome": 1,
+      "pnl": 41.84
     },
     {
       "bet_id": "kalshi:KXWCROUND-26SEMI-POR:NO",
@@ -4226,9 +4226,9 @@
       "stake": 100.0,
       "shares": 145.99,
       "status": "open",
-      "last_price": 0.455,
-      "last_ts": "2026-07-14T19:24:14Z",
-      "clv": -0.23,
+      "last_price": 0.465,
+      "last_ts": "2026-07-14T22:01:09Z",
+      "clv": -0.22,
       "closing_price": null,
       "outcome": null,
       "pnl": null
