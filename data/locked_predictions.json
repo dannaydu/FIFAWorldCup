@@ -814,5 +814,21 @@
     "p_draw": 0.3,
     "p_b": 0.3421,
     "locked_at": "2026-07-12T08:22:00Z"
+  },
+  "KXWCGAME-26JUL18FRAENG": {
+    "team_a": "France",
+    "team_b": "England",
+    "p_a": 0.3996,
+    "p_draw": 0.3164,
+    "p_b": 0.2839,
+    "locked_at": "2026-07-15T22:03:52Z"
+  },
+  "KXWCGAME-26JUL19ESPARG": {
+    "team_a": "Spain",
+    "team_b": "Argentina",
+    "p_a": 0.4447,
+    "p_draw": 0.3096,
+    "p_b": 0.2457,
+    "locked_at": "2026-07-15T22:03:52Z"
   }
 }
